@@ -14,11 +14,11 @@ contract LTokens is ERC1155 {
         playerNameToId[2] = "Stephen Curry";
         playerNameToId[3] = "Anthony Davis";
         playerNameToId[4] = "Russell Westbrook";
-        _mint(msg.sender, playerNameToId[0], 69, "");
-        _mint(msg.sender, playerNameToId[1], 69, "");
-        _mint(msg.sender, playerNameToId[2], 69, "");
-        _mint(msg.sender, playerNameToId[3], 69, "");
-        _mint(msg.sender, playerNameToId[4], 69, "");
+        _mint(msg.sender, playerNameToId(0), 69, "");
+        _mint(msg.sender, playerNameToId(1), 69, "");
+        _mint(msg.sender, playerNameToId(2), 69, "");
+        _mint(msg.sender, playerNameToId(3), 69, "");
+        _mint(msg.sender, playerNameToId(4), 69, "");
     }
 
     // ISHAN adds max owner calculations during transfer

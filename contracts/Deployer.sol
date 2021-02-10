@@ -10,6 +10,7 @@ contract MainManager {
     LTokens token;
     address payable owner;
     bool seasonStarted;
+    bool seasonEnded;
     uint256 public constant buyPrice = 0.01 ether;
     uint256 public constant weekPeriod = 7 days;
     uint256 auctionEndDate; // for now, let auctionEndDate be seasonStartDate
@@ -20,6 +21,9 @@ contract MainManager {
 
     address[] shareholders;
     mapping (address => uint256) public lastDividendWithdrawn;
+
+    uint[] topEntitiesPastWeek;
+    mapping (uint => uint) public entityToScorePastWeek;
     
     modifier onlyOwner() {
         require(msg.sender == owner);
@@ -43,6 +47,11 @@ contract MainManager {
 
     modifier hasSeasonStarted() {
         require(seasonStarted);
+        _;
+    }
+
+    modifier hasSeasonEnded() {
+        require(seasonEnded);
         _;
     }
 
@@ -78,7 +87,7 @@ contract MainManager {
         // so msg.sender is person who has shares
         // grab list of top 20 players of the last week (let's go by ppg for now) 
         // add up the ppg and assign a fraction of dividend fund based on ppg share of pool for each player
-        // grab how many shares of this player there are owned 
+        // grab how many shares of this player there are owned by shareholders
         // grab how many shares of this player msg.sender owns
         // (sender shares per player / total shares per player) x amount reserved for player from dividend fund, send this back
 
@@ -103,20 +112,27 @@ contract MainManager {
     }
 
 
-    // need function that calculates and sets dividendFund values every week
-    // also sets currWeekStart
-    function weekTrigger() public onlyOwner [
-
+    function weekTrigger() public onlyOwner {
+        // calculate top entities of past week by gripping offchain data
+        currWeekStart = block.timestamp
 
         lastWeekDividendFund = currWeekDividendFund
         currWeekDividendFund = 0
-    ]
+    }
 
     // ISHAN adds more dividend logic
      
     //function cashOutRunAway() public onlyOwner {
         //selfdestruct(msg.sender);
     //}
+
+    function endSeason() public onlyOwner {
+        // turn SFTs into NFTs
+    }
+
+    function retrieveNFT(uint256 tokenId) public hasSeasonEnded {
+
+    }
 }
 
 

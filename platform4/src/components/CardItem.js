@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Button } from './Button';
+import { Button } from './MrktButton';
+import './CardItem.css';
 
 function CardItem(props) {
   return (
@@ -15,13 +16,13 @@ function CardItem(props) {
             />
           </figure>
           <div className='cards__item__info'>
-            <h5 className='cards__item__text'>{props.name}</h5>
-            <h5 className='cards__item__text'>{props.team}</h5>
-            <h5 className='cards__item__text'>{props.position}</h5>
+            <h5 className='cards__item__name'>{props.name}</h5>
+            <h5 className='cards__item__team'>Team: {props.team}</h5>
+            <h5 className='cards__item__position'>Position: {props.position}</h5>
           </div>
           <div className="cards_item_buy-sell">
-            <Button>Buy</Button>
-            <Button>Sell</Button>
+            <Button buttonStyle='MrktButton--buy'>Buy</Button>
+            <Button buttonStyle='MrktButton--sell'>Sell</Button>
           </div>
         </Link>
       </li>

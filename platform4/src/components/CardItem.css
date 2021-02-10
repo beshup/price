@@ -1,0 +1,44 @@
+.cards__item__name{
+    color: black;
+    text-align: center;
+    margin: 5px;
+    border: 1px;
+    font-size: 19px;
+    font-weight: 900;
+    margin-right: 2px;
+    padding-left:  2px;
+}
+
+.cards__item__team{
+    color: black;
+    text-align: center;
+    margin: 5px;
+    border: 1px;
+    font-size: 14px;
+    font-weight: 900;
+    padding: 7px 0px 7px 0px;
+}
+
+.cards__item__position{
+    color: black;
+    text-align: center;
+    margin: 5px;
+    border: 1px;
+    font-size: 16px;
+    font-weight: 900;
+}
+
+.cards_item_buy-sell {
+    flex-flow: row;
+    align-items: center;
+    margin: 0 auto;
+    padding: 0px 0px 0px 0px;
+}
+
+.cards__item {
+    display: flex;
+    flex: 1;
+    margin: 0 1rem;
+    border-radius: 10px;
+    padding-left: 0%;
+  }

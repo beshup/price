@@ -10,7 +10,7 @@ function Cards() {
         <div className='cards__wrapper'>
           <ul className='cards__items'>
             <CardItem
-              src='images/img-9.jpg'
+              src='https://i.ytimg.com/vi/ZatiWqQjU7M/maxresdefault.jpg'
               name='Lebron James'
               team="Los Angeles Lakers"
               position="Small Forward"
@@ -18,17 +18,17 @@ function Cards() {
               path='/services'
             />
             <CardItem
-              src='images/img-9.jpg'
+              src='https://i.ytimg.com/vi/ZatiWqQjU7M/maxresdefault.jpg'
               name='Lebron James'
               team="Los Angeles Lakers"
               position="Small Forward"
-              label='Adventure'
+              label='All-Star'
               path='/services'
             />
           </ul>
           <ul className='cards__items'>
             <CardItem
-              src='images/img-9.jpg'
+              src='https://i.ytimg.com/vi/ZatiWqQjU7M/maxresdefault.jpg'
               name='Lebron James'
               team="Los Angeles Lakers"
               position="Small Forward"
@@ -36,7 +36,7 @@ function Cards() {
               path='/services'
             />
             <CardItem
-              src='images/img-9.jpg'
+              src='https://i.ytimg.com/vi/ZatiWqQjU7M/maxresdefault.jpg'
               name='Lebron James'
               team="Los Angeles Lakers"
               position="Small Forward"
@@ -44,7 +44,7 @@ function Cards() {
               path='/services'
             />
             <CardItem
-              src='images/img-9.jpg'
+              src='https://i.ytimg.com/vi/ZatiWqQjU7M/maxresdefault.jpg'
               name='Lebron James'
               team="Los Angeles Lakers"
               position="Small Forward"

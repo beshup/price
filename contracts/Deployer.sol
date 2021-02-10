@@ -11,10 +11,14 @@ contract MainManager {
     address payable owner;
     bool seasonStarted;
     uint256 public constant buyPrice = 0.01 ether;
-    uint256 auctionEndDate;
+    uint256 public constant weekPeriod = 7 days;
+    uint256 auctionEndDate; // for now, let auctionEndDate be seasonStartDate
 
-    uint256 dividendFund;
+    uint256 lastWeekDividendFund;
+    uint256 currWeekDividendFund;
+    uint256 currWeekStart;
 
+    address[] shareholders;
     mapping (address => uint256) public lastDividendWithdrawn;
     
     modifier onlyOwner() {
@@ -53,6 +57,12 @@ contract MainManager {
         require(msg.value > 0 && msg.value%buyPrice == 0, "Broken funds");
         uint256 numOfTokens = msg.value/buyPrice;
 
+
+        if (lastDividendWithdrawn[msg.sender] == address(0x0)) { // not already in 
+            shareholders.push(msg.sender);
+            lastDividendWithdrawn(msg.sender) = block.timestamp; // set temporary date, when auction end triggered, update
+        }
+
         require(token.balanceOf(address(this), tokenId) > numOfTokens, "Tokens sold out");
         token.transfer(msg.sender, tokenId);
     }
@@ -62,13 +72,45 @@ contract MainManager {
         //AMM deployment TODO
     }
     
-    function giveDividend(uint256 tokenId) seasonStarted {
-        // have dividedn logic w/e     
+    // paying dividend per share type, as opposed to all share tyes that msg.sender holds
+    function giveDividendPerPlayer(uint256 tokenId) seasonStarted {
+        // have dividedn logic w/e   
+        // so msg.sender is person who has shares
+        // grab list of top 20 players of the last week (let's go by ppg for now) 
+        // add up the ppg and assign a fraction of dividend fund based on ppg share of pool for each player
+        // grab how many shares of this player there are owned 
+        // grab how many shares of this player msg.sender owns
+        // (sender shares per player / total shares per player) x amount reserved for player from dividend fund, send this back
+
         
-        require((lastDividendWithdrawn[msg.sender] + 7 days) < block.timestamp);
-        lastDividendWithdrawn[msg.sender] = block.timestamp;
+        require(lastDividendWithdrawn(msg.sender) < currWeekStart);
+
+        // reuqire amount to be given out is less than lastWeekDividendFund
+
+
+        lastDividendWithdrawn(msg.sender) = block.timestamp;
         // ISHAN adds dividend logic
+        // can
     }
+
+    // function that will trigger end of auction, and set every value in lastDividendWithdrawn to current date
+    function endAuction() public auctionOngoing onlyOwner {
+        auctionEndDate = block.timestamp
+
+        for (uint i=0; i<shareholders.length; i++) {
+            lastDividendWithdrawn(shareholders[i]) = block.timestamp
+        }
+    }
+
+
+    // need function that calculates and sets dividendFund values every week
+    // also sets currWeekStart
+    function weekTrigger() public onlyOwner [
+
+
+        lastWeekDividendFund = currWeekDividendFund
+        currWeekDividendFund = 0
+    ]
 
     // ISHAN adds more dividend logic
      

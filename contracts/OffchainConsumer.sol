@@ -25,32 +25,24 @@ contract OffchainConsumer is ChainlinkClient {
     }
   
 
-    // for now, grabbing top ppg of season, later grabbing top performers only of the past week!
+    // for now, grabbing top performers of season, later grabbing top performers only of the past week!
 
-    function requestDividendWorthyEntities() public onlyOwner returns (bytes32 requestId) {
+    function requestDividendWorthyEntities(uint256 entity_id, uint256 shares_owned, uint256 shares_in_circulation, uint256 dividend_fund) public onlyOwner returns (bytes32 requestId) {
         Chainlink.Request memory request = buildChainlinkRequest(nba_JOBID, address(this), this.fulfill.selector);
         
-        // Set the URL to perform the GET request on
-        request.add("get", "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=ETH&tsyms=USD");
-        
-        // Set the path to find the desired data in the API response, where the response format is:
-        // {"RAW":
-        //   {"ETH":
-        //    {"USD":
-        //     {
-        //      "VOLUME24HOUR": xxx.xxx,
-        //     }
-        //    }
-        //   }
-        //  }
-        request.add("path", "RAW.ETH.USD.VOLUME24HOUR");
+        // Set the URL to perform the request on
+        request.add("get", "http://hax.hacker.af/to_send_per_entity/");
+        request.add("path", "to_send");
         
         // Multiply the result by 1000000000000000000 to remove decimals
         int timesAmount = 10**18;
         request.addInt("times", timesAmount);
-        
-        // Sends the request
-        // sending LINK is not fun, can we pass in amou
+
         return sendChainlinkRequestTo(nba_ORACLE, request, fee);
+    }
+
+     function fulfill(bytes32 _requestId, uint256[] _volume) public recordChainlinkFulfillment(_requestId)
+    {
+        volume = _volume;
     }
 } 

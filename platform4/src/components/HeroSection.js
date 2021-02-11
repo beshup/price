@@ -5,6 +5,7 @@ import './HeroSection.css';
 
 const Web3 = require("web3");
 
+
 const ethEnabled = () => {
   if (window.ethereum) {
     window.web3 = new Web3(window.ethereum);
@@ -32,6 +33,7 @@ class HeroSection extends React.Component {
 
 
   handleChange(event) {
+    console.log(window.ethereum.selectedAddress)
     this.setState({value: event.target.value});
     localStorage.setItem('userETHAddress', event.target.value);
   }
@@ -49,12 +51,13 @@ class HeroSection extends React.Component {
         <form autocomplete="off">
               <input
                 onChange={this.handleChange}
-                value={this.state.value}
+                value={window.ethereum.selectedAddress}
+                
                 size='50'
                 className='address-input'
                 name='email'
                 type='email'
-                placeholder=''
+                placeholder = {window.ethereum.selectedAddress}
               />
         </form>
         {this.state.value !== '' && 

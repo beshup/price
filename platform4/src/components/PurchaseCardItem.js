@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from './MrktButton';
-import './CardItem.css';
+import './PurchaseCardItem.css';
 
-function CardItem(props) {
+function PurchaseCardItem(props) {
 
   function passTransactionData() {
     localStorage.setItem('playerPurchaseName', props.name);
@@ -17,7 +17,7 @@ function CardItem(props) {
   return (
     <>
       <li className='cards__item'>
-        <Link className='cards__item__link' to={props.path}>
+        <div className='cards__item__link'>
           <figure className='cards__item__pic-wrap' data-category={props.label}>
             <img
               className='cards__item__img'
@@ -31,14 +31,20 @@ function CardItem(props) {
             <h5 className='cards__item__position'>Position: {props.position}</h5>
             <h5 className='cards__item__position'>Market Price: {props.price}</h5>
           </div>
-          <div className="cards_item_buy-sell">
-            <Button buttonStyle='MrktButton--buy' onClick={passTransactionData}>Buy</Button>
-            <Button buttonStyle='MrktButton--sell' onClick={passTransactionData}>Sell</Button>
+          <div className="shares-quantity">
+            <h5 className='cards__item__name'>Enter Share Quantity</h5>
+            <center><input className="quantity-input" type="number" min="0" max="1000"></input></center>
           </div>
-        </Link>
+          <div className="cards_item_buy-sell">
+            <input type="radio" id="buy" name="gender" value="male"></input>
+            <label for="buy">Buy</label><br></br>
+            <input type="radio" id="sell" name="gender" value="male"></input>
+            <label for="sell">Sell</label><br></br>
+          </div>
+        </div>
       </li>
     </>
   );
 }
 
-export default CardItem;
+export default PurchaseCardItem;

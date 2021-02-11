@@ -103,11 +103,15 @@ contract MainManager {
 
     // function that will trigger end of auction, and set every value in lastDividendWithdrawn to current date
     function endAuction() public auctionOngoing onlyOwner {
-        auctionEndDate = block.timestamp
+        auctionEndDate = block.timestamp;
 
         for (uint i=0; i<shareholders.length; i++) {
-            lastDividendWithdrawn[shareholders[i]] = block.timestamp
+            lastDividendWithdrawn[shareholders[i]] = block.timestamp;
         }
+    }
+
+    function getPlayerBalance(uint256 tokenId) {
+        return balanceOf(msg.sender, tokenId);
     }
 
 

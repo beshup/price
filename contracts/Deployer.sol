@@ -13,6 +13,7 @@ contract MainManager {
     bool seasonEnded;
     uint256 public constant buyPrice = 0.01 ether;
     uint256 public constant weekPeriod = 7 days;
+    uint256 public constant numEntities = 10;
     uint256 auctionEndDate; // for now, let auctionEndDate be seasonStartDate
 
     uint256 lastWeekDividendFund;
@@ -24,7 +25,6 @@ contract MainManager {
     mapping (address => uint256) public lastDividendWithdrawn;
 
     uint[] topEntitiesPastWeek;
-    mapping (uint256 => uint) public entityToScorePastWeek;
     
     modifier onlyOwner() {
         require(msg.sender == owner);
@@ -79,30 +79,24 @@ contract MainManager {
 
     function startSeason() public payable auctionEnded seasonNotStarted {
         seasonStarted = true;  
+        // for now hardcoded to 69, wil be on bell curve (worst producing and best producing players are rarer)
+        for (int i=0; i<numEntities; i++) {
+            entityToPublicShareAmount[i] = 69
+        }
         //AMM deployment TODO
     }
     
     // paying dividend per share type, as opposed to all share tyes that msg.sender holds
     function giveDividendPerPlayer(uint256 tokenId) seasonStarted {
-        // have dividedn logic w/e   
-        // so msg.sender is person who has shares
-        // grab list of top 20 players of the last week (let's go by ppg for now) 
-        // add up the ppg and assign a fraction of dividend fund based on ppg share of pool for each player
-        // grab how many shares of this player there are owned by shareholders
-        // grab how many shares of this player msg.sender owns
-        // (sender shares per player / total shares per player) x amount reserved for player from dividend fund, send this back
-        require(entityToScorePastWeek(tokenId) != 0x0);
-        require(lastDividendWithdrawn(msg.sender) < currWeekStart);
+        require(lastDividendWithdrawn[msg.sender] < currWeekStart);
 
-        uint sum = 0;
-        for (uint i=0; i<topEntitiesPastWeek.length; i++) {
-            sum += entityToScorePastWeek(topEntitiesPastWeek[i])
-        }
-        uint reservedForEntity = (entityToScorePastWeek(tokenId) / sum)*lastWeekDividendFund; 
-        
-        uint sendAmount = (balanceOf(msg.sender, tokenId) / entityToPublicShareAmount(tokenId))*reservedForEntity;
+        // res is from chainlink 
+        // tokenId is entityId
+        // balanceOf() is shares_owned
+        // entityToPublicShareAmount[token_id] is shares_in_circulation
+        // lastWeekDividendFund is dividend_fund
 
-        lastDividendWithdrawn(msg.sender) = block.timestamp;
+        lastDividendWithdrawn[msg.sender] = block.timestamp;
 
         // send back sendAmount
     }
@@ -112,13 +106,12 @@ contract MainManager {
         auctionEndDate = block.timestamp
 
         for (uint i=0; i<shareholders.length; i++) {
-            lastDividendWithdrawn(shareholders[i]) = block.timestamp
+            lastDividendWithdrawn[shareholders[i]] = block.timestamp
         }
     }
 
 
     function weekTrigger() public onlyOwner {
-        // calculate top entities of past week by gripping offchain data
         currWeekStart = block.timestamp
 
         lastWeekDividendFund = currWeekDividendFund
@@ -140,6 +133,4 @@ contract MainManager {
 
     }
 }
-
-
 

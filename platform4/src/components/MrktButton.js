@@ -16,6 +16,7 @@ const checkButtonStyle = STYLES.includes(buttonStyle)
 : STYLES[0];
 
   return (
+    <Link to='/transactions' className='MrktButton-mobile'>
       <button
         className={`MrktButton ${checkButtonStyle}`}
         onClick={onClick}
@@ -23,5 +24,7 @@ const checkButtonStyle = STYLES.includes(buttonStyle)
       >
         {children}
       </button>
+    </Link>
   );
 };
+

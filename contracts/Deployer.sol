@@ -73,8 +73,13 @@ contract MainManager {
             lastDividendWithdrawn(msg.sender) = block.timestamp; // set temporary date, when auction end triggered, update
         }
 
+        // take cut and transfer to owner address
+        // log cut in currWeekDividendFund 
+
         require(token.balanceOf(address(this), tokenId) > numOfTokens, "Tokens sold out");
         token.transfer(msg.sender, tokenId);
+
+        // wait aren' we missing tranferring the valu to us? or no does the value auto get sent to his contract
     }
 
     function startSeason() public payable auctionEnded seasonNotStarted {
@@ -120,6 +125,10 @@ contract MainManager {
 
         lastWeekDividendFund = currWeekDividendFund
         currWeekDividendFund = 0
+    }
+
+    function getShareOwnership() {
+        // hardcoded for now
     }
 
     // ISHAN adds more dividend logic

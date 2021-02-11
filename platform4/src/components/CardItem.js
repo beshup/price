@@ -19,6 +19,7 @@ function CardItem(props) {
             <h5 className='cards__item__name'>{props.name}</h5>
             <h5 className='cards__item__team'>Team: {props.team}</h5>
             <h5 className='cards__item__position'>Position: {props.position}</h5>
+            <h5 className='cards__item__position'>Market Price: {props.price}</h5>
           </div>
           <div className="cards_item_buy-sell">
             <Button buttonStyle='MrktButton--buy'>Buy</Button>

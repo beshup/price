@@ -1,33 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../App.css';
 import { Button } from './Button';
 import './HeroSection.css';
 
-function HeroSection() {
-  return (
-    <div className='hero-container'>
-      <video src='/videos/video-1.mp4' autoPlay loop muted />
-      <h1>NYSE - NBA EDITION</h1>
-      <p>Search your ETH address</p>
-      <div className='hero-btns'>
+class HeroSection extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {value: ''};
+
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({value: event.target.value});
+    localStorage.setItem('userETHAddress', event.target.value);
+  }
+  
+  render() {
+    return (
+      <div className='hero-container'>
+        <video src='/videos/broll2.mp4' autoPlay loop muted />
+        <h1>NYSE - NBA EDITION</h1>
+        <p>Enter ETH Address</p>
+        <form>
+              <input
+                onChange={this.handleChange}
+                value={this.state.value}
+                size='50'
+                className='address-input'
+                name='email'
+                type='email'
+                placeholder=''
+              />
+        </form>
+        {this.state.value !== '' && 
         <Button
-          className='btns'
-          buttonStyle='btn--outline'
-          buttonSize='btn--large'
+        link='/products'
+        buttonStyle='btn--primary'
         >
-          GET STARTED
-        </Button>
-        <Button
-          className='btns'
-          buttonStyle='btn--primary'
-          buttonSize='btn--large'
-          onClick={console.log('hey')}
-        >
-          WATCH TRAILER <i className='far fa-play-circle' />
-        </Button>
+        Check Holdings!
+        </Button>}
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default HeroSection;

@@ -8,7 +8,7 @@ contract LTokens is ERC1155 {
     mapping (uint => string) public playerIdToName;
     mapping (uint => address) public maxOwners;
 
-    constructor() public ERC1155("TEST URI") {
+    constructor() public ERC1155("http://hax.hacker.af:5000/player_sft_metadata/{id}") {
         playerNameToId[0] = "Nikola Jokic";
         playerNameToId[1] = "Karl-Anthony Towns";
         playerNameToId[2] = "Joel Embiid";

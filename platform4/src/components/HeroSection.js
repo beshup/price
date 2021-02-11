@@ -22,7 +22,7 @@ class HeroSection extends React.Component {
         <video src='/videos/broll2.mp4' autoPlay loop muted />
         <h1>NYSE - NBA EDITION</h1>
         <p>Enter ETH Address</p>
-        <form>
+        <form autocomplete="off">
               <input
                 onChange={this.handleChange}
                 value={this.state.value}

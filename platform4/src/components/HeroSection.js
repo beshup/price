@@ -15,6 +15,10 @@ class HeroSection extends React.Component {
     this.setState({value: event.target.value});
     localStorage.setItem('userETHAddress', event.target.value);
   }
+
+  endWeek() {
+
+  }
   
   render() {
     return (
@@ -40,6 +44,9 @@ class HeroSection extends React.Component {
         >
         Check Holdings!
         </Button>}
+        {this.state.value === 'admin' && 
+        <button className="admin-end-week" onClick={this.endWeek()}>End the Week - Admin</button>
+        }
       </div>
     );
   }

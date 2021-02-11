@@ -34,6 +34,7 @@ function PurchaseCardItem(props) {
           <div className="shares-quantity">
             <h5 className='cards__item__name'>Enter Share Quantity</h5>
             <center><input className="quantity-input" type="number" min="0" max="1000"></input></center>
+            <br></br>
           </div>
           <div className="cards_item_buy-sell">
             <input type="radio" id="buy" name="gender" value="male"></input>

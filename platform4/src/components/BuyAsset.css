@@ -56,6 +56,17 @@
     animation-name: fade-img;
     animation-duration: 2s;
   }
+
+  .purchase-confirmation {
+    background-color: black; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+  }
   
   .cards__item__pic-wrap::after {
     content: attr(data-category);

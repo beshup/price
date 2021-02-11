@@ -8,8 +8,6 @@ class Cards extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            numShares: 0,
-            buy: true,
             error: null,
             isLoaded: false,
             items: []

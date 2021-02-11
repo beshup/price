@@ -1,6 +1,7 @@
 import React from 'react';
 import '../../App.css';
+import BuyAsset from '../BuyAsset';
 
 export default function Transactions() {
-  return <h1 className='transactions'>MAKE TRANSACTION PAGE</h1>;
+  return <BuyAsset></BuyAsset>;
 }

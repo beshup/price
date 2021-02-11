@@ -1,6 +1,9 @@
 import React from 'react';
 import '../../App.css';
+import Holdings from '../Holdings'
 
 export default function Products() {
-  return <h1 className='products'>PRODUCTS</h1>;
+  return (
+    <Holdings></Holdings>
+  )
 }

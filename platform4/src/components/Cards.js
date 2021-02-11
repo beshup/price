@@ -16,6 +16,7 @@ function Cards() {
               position="SF"
               label='All-Star'
               path='/services'
+              price='$25.67'
             />
             <CardItem
               src='https://pbs.twimg.com/profile_images/1140381676306145280/P4LOFLBQ.jpg'
@@ -24,6 +25,7 @@ function Cards() {
               position="PG"
               label='All-Star'
               path='/services'
+              price='$4.32'
             />
             <CardItem
               src='https://i.imgflip.com/vvoo7.jpg'
@@ -32,6 +34,7 @@ function Cards() {
               position="PG"
               label='All-Star'
               path='/services'
+              price='$6.79'
             />
             <CardItem
               src='http://i.imgur.com/viaQFvq.jpg?1'
@@ -40,6 +43,7 @@ function Cards() {
               position="PF"
               label='All-Star'
               path='/services'
+              price='$58.97'
             />
             <CardItem
               src='https://ftw.usatoday.com/wp-content/uploads/sites/90/2019/02/anizj8.png?w=1000&h=600&crop=1'
@@ -48,6 +52,7 @@ function Cards() {
               position="SG"
               label='All-Star'
               path='/services'
+              price='$77.87'
             />
           </ul>
         </div>

@@ -111,7 +111,7 @@ contract MainManager {
     }
 
     function getPlayerBalance(uint256 tokenId) {
-        return balanceOf(msg.sender, tokenId);
+        return token.balanceOf(msg.sender, tokenId);
     }
 
 

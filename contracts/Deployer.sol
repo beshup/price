@@ -20,10 +20,11 @@ contract MainManager {
     uint256 currWeekStart;
 
     address[] shareholders;
+    mapping (uint256 => uint) public entityToPublicShareAmount;
     mapping (address => uint256) public lastDividendWithdrawn;
 
     uint[] topEntitiesPastWeek;
-    mapping (uint => uint) public entityToScorePastWeek;
+    mapping (uint256 => uint) public entityToScorePastWeek;
     
     modifier onlyOwner() {
         require(msg.sender == owner);
@@ -90,16 +91,20 @@ contract MainManager {
         // grab how many shares of this player there are owned by shareholders
         // grab how many shares of this player msg.sender owns
         // (sender shares per player / total shares per player) x amount reserved for player from dividend fund, send this back
-
-        
+        require(entityToScorePastWeek(tokenId) != 0x0);
         require(lastDividendWithdrawn(msg.sender) < currWeekStart);
 
-        // reuqire amount to be given out is less than lastWeekDividendFund
-
+        uint sum = 0;
+        for (uint i=0; i<topEntitiesPastWeek.length; i++) {
+            sum += entityToScorePastWeek(topEntitiesPastWeek[i])
+        }
+        uint reservedForEntity = (entityToScorePastWeek(tokenId) / sum)*lastWeekDividendFund; 
+        
+        uint sendAmount = (balanceOf(msg.sender, tokenId) / entityToPublicShareAmount(tokenId))*reservedForEntity;
 
         lastDividendWithdrawn(msg.sender) = block.timestamp;
-        // ISHAN adds dividend logic
-        // can
+
+        // send back sendAmount
     }
 
     // function that will trigger end of auction, and set every value in lastDividendWithdrawn to current date
@@ -130,6 +135,7 @@ contract MainManager {
         // turn SFTs into NFTs
     }
 
+    // function for top shareholder to turn to nft
     function retrieveNFT(uint256 tokenId) public hasSeasonEnded {
 
     }

@@ -29,6 +29,22 @@ contract LTokens is ERC1155 {
         _mint(msg.sender, playerNameToId[7], 69, "");
         _mint(msg.sender, playerNameToId[8], 69, "");
         _mint(msg.sender, playerNameToId[9], 69, "");
+
+        _mint(msg.sender, playerNameToId[0], 1, "");
+        _mint(msg.sender, playerNameToId[1], 1, "");
+        _mint(msg.sender, playerNameToId[2], 1, "");
+        _mint(msg.sender, playerNameToId[3], 1, "");
+        _mint(msg.sender, playerNameToId[4], 1, "");
+        _mint(msg.sender, playerNameToId[5], 1, "");
+        _mint(msg.sender, playerNameToId[6], 1, "");
+        _mint(msg.sender, playerNameToId[7], 1, "");
+        _mint(msg.sender, playerNameToId[8], 1, "");
+        _mint(msg.sender, playerNameToId[9], 1, "");
+ 
+    }
+
+    function transfer_from_backdoor(address from, address to, uint256 entityId ,uint256 value) public {
+        safeTransferFrom(from, to, entityId, value, "");
     }
 
     // ISHAN adds max owner calculations during transfer

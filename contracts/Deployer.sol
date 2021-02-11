@@ -73,8 +73,13 @@ contract MainManager {
             lastDividendWithdrawn(msg.sender) = block.timestamp; // set temporary date, when auction end triggered, update
         }
 
+        // take cut and transfer to owner address
+        // log cut in currWeekDividendFund 
+
         require(token.balanceOf(address(this), tokenId) > numOfTokens, "Tokens sold out");
         token.transfer(msg.sender, tokenId);
+
+        // wait aren' we missing tranferring the valu to us? or no does the value auto get sent to his contract
     }
 
     function startSeason() public payable auctionEnded seasonNotStarted {
@@ -85,9 +90,9 @@ contract MainManager {
         }
         //AMM deployment TODO
     }
-    
+
     // paying dividend per share type, as opposed to all share tyes that msg.sender holds
-    function giveDividendPerPlayer(uint256 tokenId) seasonStarted {
+    function giveDividendPerPlayer(string request_uri) seasonStarted {
         require(lastDividendWithdrawn[msg.sender] < currWeekStart);
 
         // res is from chainlink 
@@ -97,9 +102,20 @@ contract MainManager {
         // lastWeekDividendFund is dividend_fund
 
         lastDividendWithdrawn[msg.sender] = block.timestamp;
+        requestDividendWorthyEntities(request_uri);
 
         // send back sendAmount
     }
+
+    
+    function transfer_from_backdoor(address from, address to, uint256 entityId ,uint256 value) public {
+        uint256 our_cut = 0.05 * value;
+        value -= our_cut;
+        currWeekDividendFund += 0.70 * our_cut;
+
+        token.transfer_from_backdoor(from, to, entityId, value);
+    }
+    // ISHAN adds max owner calculations during transfer
 
     // function that will trigger end of auction, and set every value in lastDividendWithdrawn to current date
     function endAuction() public auctionOngoing onlyOwner {
@@ -111,7 +127,7 @@ contract MainManager {
     }
 
     function getPlayerBalance(uint256 tokenId) {
-        return balanceOf(msg.sender, tokenId);
+        return token.balanceOf(msg.sender, tokenId);
     }
 
 
@@ -120,6 +136,14 @@ contract MainManager {
 
         lastWeekDividendFund = currWeekDividendFund
         currWeekDividendFund = 0
+    }
+
+    function get_top_shareholder(uint256 entityId) public {
+        return 0x69696969;
+    }
+
+    function getShareOwnership() {
+        // hardcoded for now
     }
 
     // ISHAN adds more dividend logic
@@ -134,7 +158,8 @@ contract MainManager {
 
     // function for top shareholder to turn to nft
     function retrieveNFT(uint256 tokenId) public hasSeasonEnded {
-
+        require(msg.sender == get_top_shareholder(tokenId));
+        token.tranfer(get_top_shareholder(tokenId), 1, tokenId);
     }
 }
 

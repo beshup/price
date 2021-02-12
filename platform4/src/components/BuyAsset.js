@@ -18,6 +18,7 @@ class Cards extends React.Component {
         this.setQuantity = this.setQuantity.bind(this);
         this.setBuy = this.setBuy.bind(this);
         this.setSell = this.setSell.bind(this);
+        this.handlePurchase = this.handlePurchase.bind(this);
     }
 
     setBuy() {
@@ -38,6 +39,17 @@ class Cards extends React.Component {
         this.setState({
             quantity: n
         })
+    }
+
+    handlePurchase() {
+        const x = window.web3.utils.toWei(localStorage.getItem('playerPurchasePrice').slice(0,6),'ether');
+        if(this.state.buy) {
+            window.deployerContract.methods.buyTokens(x,parseInt(localStorage.getItem('playerTokenId'))).send({from:window.ethereum.selectedAddress, value:x*this.state.quantity})
+        } else {
+            window.deployerContract.methods.sellTokens(x*this.state.quantity).send({from:window.ethereum.selectedAddress})
+            window.tokenContract.methods.safeTransferFrom(window.ethereum.selectedAddress,window.deployerContract.address,parseInt(localStorage.getItem('playerTokenId')),this.state.quantity,'')
+        }
+        
     }
 
     componentDidMount() {
@@ -110,7 +122,7 @@ class Cards extends React.Component {
                         <center><h2>Price Summary: </h2></center>
                         <h4>{this.state.quantity.toString() + ' Shares x ' + localStorage.getItem('playerPurchasePrice') + '/share + Est. Gas: ' + items.average + ' * 21000 gwei = ' + totalCost.toString() + ' ETH'}</h4>
                         <br></br>
-                        <center><button className ="purchase-confirmation">Confirm</button></center>
+                        <center><button className ="purchase-confirmation" onClick={this.handlePurchase}>Confirm</button></center>
                     </div>
                 </div>
                 </div>

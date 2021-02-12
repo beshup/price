@@ -22,7 +22,7 @@ class Cards extends React.Component {
           (result) => {
             for(let i=0; i<result.length; ++i) {
               window.deployerContract.methods.get_buy_price(result[i].token_id).call().then((price) => {
-                result[i].price=window.web3.utils.fromWei(price);
+                result[i].price=(parseFloat(window.web3.utils.fromWei(price))*10).toString().slice(0,-12);
                 this.setState({
                   isLoaded: true,
                   items: result

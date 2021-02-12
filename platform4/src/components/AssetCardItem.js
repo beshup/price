@@ -2,8 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from './MrktButton';
 import './AssetCardItem.css';
+import ChampBtn from './champBtn'
+import DividendBtn from './DividendBtn'
+import './BuyAsset.css';
+
 
 function PlayerAsset(props) {
+  
   return (
     <>
       <li className='cards__item'>
@@ -14,6 +19,8 @@ function PlayerAsset(props) {
               alt='Travel Image'
               src={props.src}
             />
+            <DividendBtn tokenId={props.tokenId} deployerContract={props.deployerContract} userAddress={props.userAddress}></DividendBtn>
+            <ChampBtn tokenId={props.tokenId} deployerContract={props.deployerContract} userAddress={props.userAddress}></ChampBtn>
           </figure>
           <div className='cards__item__info'>
             <h5 className='cards__item__name'>{props.name}</h5>

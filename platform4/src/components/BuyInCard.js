@@ -4,6 +4,8 @@ import { Button } from './MrktButton';
 import './CardItem.css';
 import Web3 from 'web3';
 
+require('dotenv').config()
+
 function BuyCardItem(props) {
 
   function passTransactionData() {

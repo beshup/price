@@ -5,6 +5,8 @@ import PlayerAsset from './AssetCardItem';
 import Web3 from 'web3'
 import Loading from './Loading';
 
+require('dotenv').config()
+
 class Cards extends Component {
     constructor(props) {
         super(props);
@@ -12,7 +14,8 @@ class Cards extends Component {
           error: null,
           isLoaded: false,
           items: [],
-          account: 'nyeaheh'
+          userAddress: '',
+          deployerContract: null
         };
     }
 
@@ -26,7 +29,7 @@ class Cards extends Component {
 
         const userAddress = window.ethereum.selectedAddress
         const accounts = await window.web3.eth.getAccounts()
-        this.setState({account: accounts[0]})
+        this.setState({account: accounts[0], deployerContract: deployerContract, userAddress: userAddress})
         
         let sharesHeld = []
         for (var i=0; i<20; i++) {
@@ -57,6 +60,8 @@ class Cards extends Component {
             }
         )
     }
+
+
 
     componentDidMount() {
         this.loadBlockchainData()
@@ -104,6 +109,8 @@ class Cards extends Component {
                         label='All-Star'
                         path='/services'
                         sharesOwned={player.amount}
+                        deployerContract={this.state.deployerContract}
+                        userAddress={this.state.userAddress}
                     />
                 );
             }); 

@@ -4,6 +4,8 @@ import { Button } from './Button';
 import { Link } from 'react-router-dom';
 import Web3 from 'web3'
 
+require('dotenv').config();
+
 class Footer extends React.Component {
   constructor(props) {
     super(props);
@@ -67,11 +69,11 @@ class Footer extends React.Component {
           <div class='social-media-wrap'>
             <div class='footer-logo'>
               <Link to='/' className='social-logo'>
-                Stonks
+                pr!ce
                 <i class='fab fa-typo3' />
               </Link>
             </div>
-            <small class='website-rights'>Stonks © 2020</small>
+            <small class='website-rights'>pr!ce © 2020</small>
             <div class='social-icons'>
               <Link
                 class='social-icon-link facebook'

@@ -61,44 +61,32 @@ class Donate extends React.Component {
           }); 
           return (
               <div className='cards'>
-              <h1>Marketplace</h1>
+              <h1>Donation</h1>
               <div className='cards__container'>
                   <div className='cards__wrapper'>
                   <ul className='cards__items'>
                   <DonateCardItem
-                      src='charity'
-                      name='charity'
-                      team='charity'
-                      position='charity'
-                      label='All-Star'
-                      path='/services'
+                      src='https://thewaterproject.org/images/The_Water_Project_Logo.png'
+                      name='The Water Project'
+                      path='https://thewaterproject.org/donate-ethereum'
                       price='charity'
                   />
                   <DonateCardItem
-                      src='charity'
+                      src='https://www.un.org/youthenvoy/wp-content/uploads/2014/09/unicef_twitter1.png'
                       name='Unicef'
-                      team='charity'
-                      position='charity'
-                      label='All-Star'
-                      path='/services'
+                      path='https://www.unicef.org/press-releases/unicef-launches-cryptocurrency-fund'
                       price='charity'
                   />
                   <DonateCardItem
-                      src='charity'
-                      name='Other Charity'
-                      team='charity'
-                      position='charity'
-                      label='All-Star'
-                      path='/services'
+                      src='https://pbs.twimg.com/profile_images/1039157634753077253/viDNvu-2_400x400.jpg'
+                      name='Cool Earth'
+                      path='https://www.coolearth.org/cryptocurrency-donations/'
                       price='charity'
                   />
                   <DonateCardItem
-                      src='charity'
-                      name='Other other charity'
-                      team='charity'
-                      position='charity'
-                      label='All-Star'
-                      path='/services'
+                      src='https://www.healthynewbornnetwork.org/hnn-content/uploads/SC_USA_Logo_RedBlack_Stacked-003.jpg'
+                      name='Save the Children'
+                      path='https://www.savethechildren.org/us/ways-to-help/ways-to-give/ways-to-help/cryptocurrency-donation'
                       price='charity'
                   />
                   </ul>

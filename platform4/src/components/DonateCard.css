@@ -3,20 +3,11 @@
     text-align: center;
     margin: 5px;
     border: 1px;
-    font-size: 20px;
+    font-size: 19px;
     font-weight: 900;
     margin-right: 2px;
     padding-left:  2px;
-}
-
-.cards__item__pos{
-    color: black;
-    text-align: center;
-    margin: 5px;
-    border: 1px;
-    font-size: 20px;
-    font-weight: 900;
-    padding: 7px 0px 7px 0px;
+    text-decoration: none;
 }
 
 .cards__item__team{
@@ -24,9 +15,14 @@
     text-align: center;
     margin: 5px;
     border: 1px;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 900;
     padding: 7px 0px 7px 0px;
+    text-decoration: none;
+}
+
+input[type="radio"]{
+    margin: 0 4px 0 20px;
 }
 
 .cards__item__position{
@@ -36,6 +32,7 @@
     border: 1px;
     font-size: 16px;
     font-weight: 900;
+    text-decoration: none;
 }
 
 .cards_item_buy-sell {
@@ -55,3 +52,22 @@
     border-radius: 10px;
     padding-left: 0%;
   }
+
+  .cards__item__link {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    box-shadow: 0 6px 20px rgba(56, 125, 255, 0.17);
+    -webkit-filter: drop-shadow(0 6px 20px rgba(56, 125, 255, 0.017));
+    filter: drop-shadow(0 6px 20px rgba(56, 125, 255, 0.017));
+    border-radius: 10px;
+    overflow: hidden;
+    text-decoration: none;
+  }
+
+  .quantity-input {
+      color: black;
+  }
+.cards__item__pic-wrap {
+    color: transparent;
+}

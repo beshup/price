@@ -88,6 +88,8 @@ contract MainManager {
         for (int i=0; i<numEntities; i++) {
             entityToPublicShareAmount[i] = 69
         }
+
+        return 69;
         //AMM deployment TODO
     }
 

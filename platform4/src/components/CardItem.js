@@ -12,6 +12,15 @@ function CardItem(props) {
     localStorage.setItem('playerPurchasePrice', props.price);
     localStorage.setItem('playerPurchaseImg', props.src);
     localStorage.setItem('playerPurchaseLabel', props.label);
+    localStorage.setItem('playerTokenId', props.tokenId);
+  }
+
+  function buyHandler() {
+
+  }
+
+  function sellHandler() {
+
   }
 
   return (

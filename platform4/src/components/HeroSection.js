@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import '../App.css';
 import { Button } from './Button';
 import './HeroSection.css';
-
-const Web3 = require("web3");
-
+import Web3 from 'web3';
 
 const ethEnabled = () => {
   if (window.ethereum) {

@@ -16,6 +16,7 @@ class PurchaseCardItem extends React.Component {
       handleChange(event) {
         this.setState({numShares: event.target.value});
         localStorage.setItem('pricePerShare', event.target.value);
+        this.props.setQuantity(event.target.value);
       }
 
       // KEY NOTE: IF BOTH BUY AND SELL ARE TRUE THIS IS INVALID CASE, CAN FIX TMR
@@ -58,9 +59,9 @@ class PurchaseCardItem extends React.Component {
                     <br></br>
                   </div>
                   <div className="cards_item_buy-sell">
-                    <input type="radio" id="buy" name="gender" value="male" onClick={this.confirmBuy}></input>
+                    <input type="radio" id="buy" name="gender" value="male" onClick={this.props.buyAssert}></input>
                     <label for="buy">Buy</label><br></br>
-                    <input type="radio" id="sell" name="gender" value="male" onClick={this.confirmSell}></input>
+                    <input type="radio" id="sell" name="gender" value="male" onClick={this.props.sellAssert}></input>
                     <label for="sell">Sell</label><br></br>
                   </div>
                 </div>

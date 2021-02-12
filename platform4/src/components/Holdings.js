@@ -2,6 +2,7 @@ import React from 'react';
 import './Cards.css';
 import CardItem from './CardItem';
 import PlayerAsset from './AssetCardItem';
+import Loading from './Loading';
 
 class Cards extends React.Component {
     constructor(props) {
@@ -64,7 +65,7 @@ class Cards extends React.Component {
         if (error) {
             return <div>Error: {error.message}</div>;
         } else if (!isLoaded) {
-            return <div>Loading...</div>;
+            return <Loading></Loading>;
         } else {
             console.log(items);
             let arr = items.map((player) => {

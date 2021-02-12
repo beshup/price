@@ -14,21 +14,21 @@ class Cards extends Component {
           error: null,
           isLoaded: false,
           items: [],
-          account: 'nyeaheh'
+          userAddress: '',
+          deployerContract: null
         };
     }
 
 
     async loadBlockchainData() {
-        const ABI = 
         window.web3 = new Web3(window.ethereum);
         window.ethereum.enable();
         // grab the default account address
-        var deployerContract = new window.web3.eth.Contract(ABI, process.env.DEPLOYER_CONTRACT_ADDRESS);
+        var deployerContract = new window.web3.eth.Contract(process.env.ABI, process.env.DEPLOYER_CONTRACT_ADDRESS);
 
         const userAddress = window.ethereum.selectedAddress
         const accounts = await window.web3.eth.getAccounts()
-        this.setState({account: accounts[0]})
+        this.setState({account: accounts[0], deployerContract: deployerContract, userAddress: userAddress})
         
         let sharesHeld = []
         for (var i=0; i<20; i++) {
@@ -111,6 +111,8 @@ class Cards extends Component {
                         label='All-Star'
                         path='/services'
                         sharesOwned={player.amount}
+                        deployerContract={this.state.deployerContract}
+                        userAddress={this.state.userAddress}
                     />
                 );
             }); 

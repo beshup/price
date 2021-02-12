@@ -7,6 +7,7 @@ import './BuyAsset.css';
 
 
 function PlayerAsset(props) {
+
   return (
     <>
       <li className='cards__item'>
@@ -18,7 +19,7 @@ function PlayerAsset(props) {
               src={props.src}
             />
             <button className="purchase-confirmation">Collect Dividends</button>
-            <ChampBtn></ChampBtn>
+            <ChampBtn tokenId={props.tokenId} deployerContract={props.deployerContract} userAddress={props.userAddress}></ChampBtn>
           </figure>
           <div className='cards__item__info'>
             <h5 className='cards__item__name'>{props.name}</h5>

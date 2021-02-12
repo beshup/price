@@ -3,6 +3,7 @@ import './Cards.css';
 import CardItem from './CardItem';
 import PlayerAsset from './AssetCardItem';
 import Web3 from 'web3'
+import Loading from './Loading';
 
 class Cards extends Component {
     constructor(props) {
@@ -116,7 +117,7 @@ class Cards extends Component {
         if (error) {
             return <div>Error: {error.message}</div>;
         } else if (!isLoaded) {
-            return <div>Loading...</div>;
+            return <Loading></Loading>;
         } else {
             console.log(items);
             let arr = items.map((player) => {

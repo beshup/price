@@ -46,7 +46,7 @@ class HeroSection extends React.Component {
     return (
       <div className='hero-container'>
         <video src='/videos/broll2.mp4' autoPlay loop muted />
-        <h1>NYSE - NBA EDITION</h1>
+        <h1>WELCOME TO STONKS</h1>
         <p>Enter ETH Address</p>
         <form autocomplete="off">
               <input
@@ -55,9 +55,6 @@ class HeroSection extends React.Component {
                 onChange={this.handleChange}
                 size='50'
                 className='address-input'
-                name='email'
-                type='email'
-                
               />
         </form>
         {window.ethereum.selectedAddress !== '' && 
@@ -67,7 +64,7 @@ class HeroSection extends React.Component {
         buttonStyle='btn--primary'
         onClick={ethEnabled}
         >
-        Check Holdings!
+        Check Holdings
         </Button>}
       </div>
     );

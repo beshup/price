@@ -41,6 +41,10 @@ class HeroSection extends React.Component {
   endWeek() {
 
   }
+
+  endSeason() {
+
+  }
   
   render() {
     return (
@@ -52,7 +56,6 @@ class HeroSection extends React.Component {
               <input
                 onChange={this.handleChange}
                 value={window.ethereum.selectedAddress}
-                
                 size='50'
                 className='address-input'
                 name='email'
@@ -69,9 +72,6 @@ class HeroSection extends React.Component {
         >
         Check Holdings!
         </Button>}
-        {this.state.value === 'admin' && 
-        <button className="admin-end-week" onClick={this.endWeek()}>End the Week - Admin</button>
-        }
       </div>
     );
   }

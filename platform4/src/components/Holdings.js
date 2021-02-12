@@ -5,6 +5,8 @@ import PlayerAsset from './AssetCardItem';
 import Web3 from 'web3'
 import Loading from './Loading';
 
+require('dotenv').config()
+
 class Cards extends Component {
     constructor(props) {
         super(props);
@@ -22,7 +24,7 @@ class Cards extends Component {
         window.web3 = new Web3(window.ethereum);
         window.ethereum.enable();
         // grab the default account address
-        var deployerContract = new window.web3.eth.Contract(ABI, "0x762ecabeE51016dd27cf6f52AB170b139d40A168", {});
+        var deployerContract = new window.web3.eth.Contract(ABI, process.env.DEPLOYER_CONTRACT_ADDRESS);
 
         const userAddress = window.ethereum.selectedAddress
         const accounts = await window.web3.eth.getAccounts()

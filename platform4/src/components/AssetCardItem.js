@@ -2,6 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from './MrktButton';
 import './AssetCardItem.css';
+import ChampBtn from './champBtn'
+import './BuyAsset.css';
+
 
 function PlayerAsset(props) {
   return (
@@ -14,6 +17,8 @@ function PlayerAsset(props) {
               alt='Travel Image'
               src={props.src}
             />
+            <button className="purchase-confirmation">Collect Dividends</button>
+            <ChampBtn></ChampBtn>
           </figure>
           <div className='cards__item__info'>
             <h5 className='cards__item__name'>{props.name}</h5>

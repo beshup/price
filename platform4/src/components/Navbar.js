@@ -43,7 +43,7 @@ function Navbar() {
             </li>
             <li className='nav-item'>
               <Link
-                to={localStorage.getItem('seasonStarted') ? '/services' : '/buyin'}
+                to={localStorage.getItem('seasonStarted') === 'true' ? '/services' : '/buyin'}
                 className='nav-links'
                 onClick={closeMobileMenu}
               >

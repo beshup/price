@@ -9,7 +9,7 @@ class champBtn extends React.Component {
     }
 
     render() {
-        if (localStorage.getItem("seasonEnded") == true) {
+        if (localStorage.getItem("seasonEnded") == true && this.props.tokenId < 10) {
             return (
                 <button className="purchase-confirmation retrieve" onClick={this.onClick(this.props.tokenId)}>Retrieve Champion NFT</button>
             )

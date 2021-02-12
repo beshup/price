@@ -9,12 +9,22 @@
     padding-left:  2px;
 }
 
+.cards__item__pos{
+    color: black;
+    text-align: center;
+    margin: 5px;
+    border: 1px;
+    font-size: 16px;
+    font-weight: 900;
+    padding: 7px 0px 7px 0px;
+}
+
 .cards__item__team{
     color: black;
     text-align: center;
     margin: 5px;
     border: 1px;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 900;
     padding: 7px 0px 7px 0px;
 }

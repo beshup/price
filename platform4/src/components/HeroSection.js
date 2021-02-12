@@ -63,7 +63,7 @@ class HeroSection extends React.Component {
                 placeholder = {window.ethereum.selectedAddress}
               />
         </form>
-        {this.state.value !== '' && 
+        {window.ethereum.selectedAddress !== '' && 
         MetaMask == "True" &&
         <Button
         link='/products'

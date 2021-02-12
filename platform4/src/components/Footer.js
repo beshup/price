@@ -28,16 +28,16 @@ class Footer extends React.Component {
   }
 
   async startSeason(event) {
-    console.log(await this.state.deployerContract.methods.startSeason().call({from:this.state.userAddress}))
+    this.state.deployerContract.methods.startSeason().call({from:this.state.userAddress})
     localStorage.removeItem("seasonEnded")
     localStorage.setItem('seasonStarted', true)
   }
 
-  endWeek(event) {
+  async endWeek(event) {
     this.state.deployerContract.methods.endWeek().call({from:this.state.userAddress})
   }
 
-  endSeason(event) {
+  async endSeason(event) {
     this.state.deployerContract.methods.endSeason().call({from:this.state.userAddress})
     localStorage.setItem("seasonEnded", true)
   }
@@ -60,9 +60,9 @@ class Footer extends React.Component {
               />
               <Button link='/services' buttonStyle='btn--outline'>Subscribe</Button>
             </form>
-            {this.state.password==='admin' && <button onChange={this.startSeason()}>Admin -- Start Season</button>}
-            {this.state.password==='admin' && <button onChange={this.endWeek()}>Admin -- End Week</button>}
-            {this.state.password==='admin' && <button onChange={this.endSeason()}>Admin -- End Season</button>}
+            {this.state.password==='admin' && <button onClick={this.startSeason()}>Admin -- Start Season</button>}
+            {this.state.password==='admin' && <button onClick={this.endWeek()}>Admin -- End Week</button>}
+            {this.state.password==='admin' && <button onClick={this.endSeason()}>Admin -- End Season</button>}
           </div>
         </section>
         <section class='social-media'>

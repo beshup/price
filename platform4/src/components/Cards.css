@@ -102,6 +102,10 @@ h1 {
   line-height: 24px;
 }
 
+.disclaimer {
+  color: #3d3d3d;
+}
+
 @media only screen and (min-width: 1200px) {
   .content__blog__container {
     width: 84%;

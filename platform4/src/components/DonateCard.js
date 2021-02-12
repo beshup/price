@@ -12,6 +12,7 @@ class DonateCardItem extends React.Component {
             isLoaded: false,
             items: [],
             donated: 0,
+            amountToDonate: 0.4,
             waterProjectAddress: '0x5389e39821edc01bb5f6e4b42685c9b9516e1e52',
             coolEarthAddress:'0x3c8cB169281196737c493AfFA8F49a9d823bB9c5',
             saveTheChildrenAddress:'0xA0780a008D9CeFC58821Ca3E05dFE1173087C3C4',
@@ -22,13 +23,14 @@ class DonateCardItem extends React.Component {
     handleDonation() {
         this.setState({
             donated:1,
+            amountToDonate:0
         })
     }
 
     render() {
         return (
             <>
-            {this.state.donated === 0 && 
+            {(this.state.donated === 0 && this.state.amountToDonate !== 0) && 
 
             <li className='cards__item'>
             <Link className='cards__item__link' to={this.props.path}>
@@ -54,7 +56,9 @@ class DonateCardItem extends React.Component {
             <div className="donation-complete-top">
                 <h4>We just sent 0.4 ETH to address</h4>
             </div> 
-            
+            }
+            {(this.state.amountToDonate === 0 && this.state.donated===0) && 
+            <h1>All Done! Thank You For Your Support</h1>
             }
             </>
           );

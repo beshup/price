@@ -65,7 +65,7 @@ class Donate extends React.Component {
               <h1>Donation</h1>
               <br></br>
               <center><h3>Hey {window.ethereum.selectedAddress}, congrats on your big win!</h3></center>
-              <center><h3>We would like to offer up 25% of this season's revenue for you to donate to the charity of your choice.</h3></center>
+              <center><h3>We would like to offer up all of this season's revenue for you to donate to the charity of your choice.</h3></center>
               <div className='cards__container'>
                   <div className='cards__wrapper'>
                   <ul className='cards__items'>
@@ -75,6 +75,7 @@ class Donate extends React.Component {
                       name='The Water Project'
                       path='https://thewaterproject.org/donate-ethereum'
                       price='charity'
+                      label='SDG: Clean Water and Sanitation'
                   />
                   <DonateCardItem
                       src='https://dappimg.com/media/image/app/edf86b29-8656-414c-b14e-b275d5d0537f.png'
@@ -82,6 +83,7 @@ class Donate extends React.Component {
                       name='The Giveth'
                       path='https://giveth.io/'
                       price='charity'
+                      label='Driving Crypto Adoption for Charity'
                   />
                   <DonateCardItem
                       src='https://pbs.twimg.com/profile_images/1039157634753077253/viDNvu-2_400x400.jpg'
@@ -89,6 +91,7 @@ class Donate extends React.Component {
                       description='Fighting climate change and deforestation around the world.'
                       path='https://www.coolearth.org/cryptocurrency-donations/'
                       price='charity'
+                      label='SDG: Climate Action'
                   />
                   <DonateCardItem
                       src='https://www.healthynewbornnetwork.org/hnn-content/uploads/SC_USA_Logo_RedBlack_Stacked-003.jpg'
@@ -96,9 +99,11 @@ class Donate extends React.Component {
                       description='Making the world a better place for children around the world.'
                       path='https://www.savethechildren.org/us/ways-to-help/ways-to-give/ways-to-help/cryptocurrency-donation'
                       price='charity'
+                      label='SDG: Partnerships'
                   />
                   </ul>
                   </div>
+              <center><h1 className='disclaimer'>More United Nations SDG Charities Being Added Soon...</h1></center>
               </div>
               </div>
           );

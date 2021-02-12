@@ -42,10 +42,11 @@ class Cards extends React.Component {
     }
 
     handlePurchase() {
-        const x = window.web3.utils.toWei(localStorage.getItem('playerPurchasePrice').slice(0,6),'ether');
         if(this.state.buy) {
-            window.deployerContract.methods.buyTokens(x,parseInt(localStorage.getItem('playerTokenId'))).send({from:window.ethereum.selectedAddress, value:x*this.state.quantity})
+            const y = window.web3.utils.toWei(localStorage.getItem('playerPurchasePrice').slice(0,5),'ether');
+            window.deployerContract.methods.buyTokens(y,parseInt(localStorage.getItem('playerTokenId'))).send({from:window.ethereum.selectedAddress, value:y*this.state.quantity})
         } else {
+            const x = window.web3.utils.toWei(localStorage.getItem('playerPurchasePrice').slice(0,5),'ether');
             console.log(window.deployerContract.options.address);
             window.deployerContract.methods.sellTokens((x*this.state.quantity).toString()).send({from:window.ethereum.selectedAddress})
             window.tokenContract.methods.safeTransferFrom(window.ethereum.selectedAddress,'0x4F057932615df1050B7df5fDd0EB5CaD2Cf95AA4',parseInt(localStorage.getItem('playerTokenId')),this.state.quantity,'0x').send({from:window.ethereum.selectedAddress})

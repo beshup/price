@@ -25,7 +25,7 @@ class Cards extends Component {
         window.web3 = new Web3(window.ethereum);
         await window.ethereum.enable();
         // grab the default account address
-        var deployerContract = new window.web3.eth.Contract(ABI, "0x6138F421ca5dc2EcA5c53f431ea24a1bAdaeAAB4", {});
+        var deployerContract = new window.web3.eth.Contract(ABI, "0x812Ee59411Ee4084F805B8733960a2E6DEaCe828", {});
 
         const userAddress = window.ethereum.selectedAddress
         const accounts = await window.web3.eth.getAccounts()
@@ -111,6 +111,7 @@ class Cards extends Component {
                         sharesOwned={player.amount}
                         deployerContract={this.state.deployerContract}
                         userAddress={this.state.userAddress}
+                        tokenId={player.player_data.token_id}
                     />
                 );
             }); 

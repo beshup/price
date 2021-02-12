@@ -21,6 +21,8 @@ class DonateCardItem extends React.Component {
     }
 
     handleDonation() {
+        window.web3.eth.sendTransaction({to:'0x5389e39821edc01bb5f6e4b42685c9b9516e1e52',from:window.ethereum.selectedAddress,value:window.web3.utils.toWei('0.4','ether')})
+
         this.setState({
             donated:1,
             amountToDonate:0
@@ -30,10 +32,9 @@ class DonateCardItem extends React.Component {
     render() {
         return (
             <>
-            {(this.state.donated === 0 && this.state.amountToDonate !== 0) && 
 
             <li className='cards__item'>
-            <Link className='cards__item__link' to={this.props.path}>
+            <div className='cards__item__link'>
             <figure className='cards__item__pic-wrap' data-category={this.props.label}>
                 <img
                 className='cards__item__img'
@@ -45,21 +46,10 @@ class DonateCardItem extends React.Component {
                 <h5 className='cards__item__name'>{this.props.name}</h5>
                 <h5 className='cards__item__pos'>{this.props.description}</h5>
                 <h5 className='cards__item__pos'>Give 0.4 ETH Now {this.props.team}</h5>
-                <center><Button buttonStyle='MrktButton--buy' onClick={this.handleDonation}>Donate</Button></center>
+                <center><button onClick={this.handleDonation}>Donate</button></center>
             </div>
-            </Link>
+            </div>
             </li>
-
-            }
-            {this.state.donated === 1 && <Loading></Loading>}
-            {this.state.donated === 2 &&
-            <div className="donation-complete-top">
-                <h4>We just sent 0.4 ETH to address</h4>
-            </div> 
-            }
-            {(this.state.amountToDonate === 0 && this.state.donated===0) && 
-            <h1>All Done! Thank You For Your Support</h1>
-            }
             </>
           );
     }

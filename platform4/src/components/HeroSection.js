@@ -46,7 +46,7 @@ class HeroSection extends React.Component {
     return (
       <div className='hero-container'>
         <video src='/videos/broll2.mp4' autoPlay loop muted />
-        <h1>WELCOME TO STONKS</h1>
+        <h1>WELCOME TO PR!CE</h1>
         <p>Enter ETH Address</p>
         <form autocomplete="off">
               <input

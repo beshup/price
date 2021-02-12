@@ -64,7 +64,7 @@ class Donate extends React.Component {
               <div className='cards'>
               <h1>Donation</h1>
               <br></br>
-              <center><h3>Hey {window.ethereum.selectedAddress}, congrats on your big win!</h3></center>
+              <center><h3>Hey, congrats on your big win!</h3></center>
               <center><h3>We would like to offer up all of this season's revenue for you to donate to the charity of your choice.</h3></center>
               <div className='cards__container'>
                   <div className='cards__wrapper'>

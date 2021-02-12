@@ -9,17 +9,17 @@ class champBtn extends React.Component {
     }
 
     render() {
-        if (localStorage.getItem("seasonEnded") == true && this.props.tokenId < 10) {
+        if (localStorage.getItem("seasonEnded") === 'true' && this.props.tokenId < 10) {
             return (
-                <button className="purchase-confirmation retrieve" onClick={this.onClick(this.props.tokenId)}>Retrieve Champion NFT</button>
+                <button className="purchase-confirmation" onClick={this.onClick}>Retrieve Champion NFT</button>
             )
         } else {
             return(<div></div>);
         }
     }
 
-    onClick(tokenId) {
-        this.props.deployerContract.methods.retrieveNFT(tokenId).call({from:this.props.userAddress})
+    onClick() {
+        this.props.deployerContract.methods.retrieveNFT(this.props.tokenId).send({from:this.props.userAddress})
     }
 }
 

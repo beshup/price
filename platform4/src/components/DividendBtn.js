@@ -11,19 +11,19 @@ class DividendBtn extends React.Component {
     render() {
         if (this.props.tokenId < 10) {
             return (
-                <button className="purchase-confirmation" onClick={this.onClick(this.props.tokenId, this.props.sharesOwned, this.props.userAddress, this.props.deployerContract)}>Collect Dividends</button>
+                <button className="purchase-confirmation" onClick={this.onClick}>Collect Dividends</button>
             )
         } else {
             return(<div></div>);
         }
     }
 
-    onClick(tokenId, sharesOwned, userAddress, deployerContract) {
-        fetch(`http://hax.hacker.af:5000/to_send_per_entity/${tokenId}/${sharesOwned}/69/100`)
+    onClick() {
+        fetch(`http://hax.hacker.af:5000/to_send_per_entity/${this.props.tokenId}/${this.props.sharesOwned}/69/100000000000000000000`)
           .then(res => res.json())
           .then(
             (result) => {
-               deployerContract.methods.sellTokens(result.to_send).call({from:userAddress})
+               this.props.deployerContract.methods.sellTokens(result.to_send.toString()).send({from:this.props.userAddress})
             },
             (error) => {
               console.log(error)

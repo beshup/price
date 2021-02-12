@@ -3,6 +3,7 @@ import './BuyAsset.css';
 import CardItem from './CardItem';
 import {TransactionButton} from './TransactionButton';
 import PurchaseCardItem from './PurchaseCardItem';
+import ChampBtn from './champBtn'
 import Loading from './Loading';
 
 class Cards extends React.Component {
@@ -61,7 +62,15 @@ class Cards extends React.Component {
                 });
             }
             )
+    }
+
+    transfer() {
+        if (this.buy == true) {
+            // address from and to, switch and call function 
+        } else {
+            
         }
+    }
 
     render() {
         const { error, isLoaded, items } = this.state;
@@ -79,7 +88,10 @@ class Cards extends React.Component {
                 <div className='cards'>
                 <h1>Player Share Transaction</h1>
                 <br></br>
-                <center><button className ="purchase-confirmation">Collect Dividends</button></center>
+                <center>
+                    <button className="purchase-confirmation">Collect Dividends</button>
+                    <ChampBtn></ChampBtn>
+                </center>
                 <div className='cards__container'>
                     <div className='cards__wrapper'>
                     <ul className='cards__items'>

@@ -12,8 +12,7 @@ class Cards extends Component {
           error: null,
           isLoaded: false,
           items: [],
-          account: 'nyeaheh',
-          deployerContract: null
+          account: 'nyeaheh'
         };
     }
 
@@ -42,6 +41,7 @@ class Cards extends Component {
                     }
                 })
                 this.setState({
+                    isLoaded: true,
                     items: tempItems
                 })
             },
@@ -58,29 +58,6 @@ class Cards extends Component {
         this.loadBlockchainData()
     }
     
-/*
-    componentDidMount() {
-        fetch("http://hax.hacker.af:5000/grip_league")
-          .then(res => res.json())
-          .then(
-            (result) => {
-              this.setState({
-                isLoaded: true,
-                items: result
-              });
-            },
-            // Note: it's important to handle errors here
-            // instead of a catch() block so that we don't swallow
-            // exceptions from actual bugs in components.
-            (error) => {
-              this.setState({
-                isLoaded: true,
-                error
-              });
-            }
-          )
-      }
-*/
     createPlayerCards() {
         let ret = '';
         fetch('http://hax.hacker.af:5000/grip_league')

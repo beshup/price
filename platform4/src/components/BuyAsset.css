@@ -66,8 +66,9 @@
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+    cursor:pointer;
   }
-  
+
   .cards__item__pic-wrap::after {
     content: attr(data-category);
     position: absolute;
@@ -105,6 +106,10 @@
     padding: 20px 30px 30px;
     margin: 10px 0px 10px 0px;
     
+  }
+
+  .retrieve {
+    margin-left: 10px;
   }
   
   .cards__item__text {

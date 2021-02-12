@@ -2,18 +2,40 @@ import React from 'react';
 import './Footer.css';
 import { Button } from './Button';
 import { Link } from 'react-router-dom';
+import Web3 from 'web3'
 
 class Footer extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {password: ''};
+    window.web3 = new Web3(window.ethereum);
+    this.state = {password: '', deployerContract: new window.web3.eth.Contract([], window.web3.eth.defaultAccount, {})};
+
     this.handleChange = this.handleChange.bind(this);
+    // grab the default account address
+
+    const userAddress = window.ethereum.selectedAddress
+    const accounts = window.web3.eth.getAccounts()
+    this.setState({account: accounts[0]})
   }
 
 
   handleChange(event) {
     this.setState({password: event.target.value});
     localStorage.setItem('userETHAddress', event.target.value);
+  }
+
+  startSeason(event) {
+    this.state.deployerContract.methods.startSeason()
+    localStorage.removeItem("seasonEnded")
+  }
+
+  endWeek(event) {
+    this.state.deployerContract.methods.endWeek()
+  }
+
+  endSeason(event) {
+    this.state.deployerContract.methods.endSeason()
+    localStorage.setItem("seasonEnded", true)
   }
 
   render() {
@@ -34,9 +56,9 @@ class Footer extends React.Component {
               />
               <Button link='/services' buttonStyle='btn--outline'>Subscribe</Button>
             </form>
-            {this.state.password==='admin' && <button>Admin -- Start Season</button>}
-            {this.state.password==='admin' && <button>Admin -- End Week</button>}
-            {this.state.password==='admin' && <button>Admin -- End Season</button>}
+            {this.state.password==='admin' && <button onChange={this.startSeason()}>Admin -- Start Season</button>}
+            {this.state.password==='admin' && <button onChange={this.endWeek()}>Admin -- End Week</button>}
+            {this.state.password==='admin' && <button onChange={this.endSeason()}>Admin -- End Season</button>}
           </div>
         </section>
         <section class='social-media'>

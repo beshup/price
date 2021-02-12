@@ -27,6 +27,7 @@ class Footer extends React.Component {
   startSeason(event) {
     this.state.deployerContract.methods.startSeason()
     localStorage.removeItem("seasonEnded")
+    localStorage.setItem('seasonStarted', true)
   }
 
   endWeek(event) {

@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import '../App.css';
 import { Button } from './Button';
 import './HeroSection.css';
-
-const Web3 = require("web3");
-
+import Web3 from 'web3';
 
 const ethEnabled = () => {
   if (window.ethereum) {
@@ -31,11 +29,9 @@ class HeroSection extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-
   handleChange(event) {
-    console.log(window.ethereum.selectedAddress)
     this.setState({value: event.target.value});
-    localStorage.setItem('userETHAddress', event.target.value);
+    localStorage.setItem('userETHAddress', window.ethereum.selectedAddress);
   }
 
   endWeek() {
@@ -54,17 +50,18 @@ class HeroSection extends React.Component {
         <p>Enter ETH Address</p>
         <form autocomplete="off">
               <input
-                onChange={this.handleChange}
                 value={window.ethereum.selectedAddress}
+                placeholder = {window.ethereum.selectedAddress}
+                onChange={this.handleChange}
                 size='50'
                 className='address-input'
                 name='email'
                 type='email'
-                placeholder = {window.ethereum.selectedAddress}
+                
               />
         </form>
         {window.ethereum.selectedAddress !== '' && 
-        MetaMask == "True" &&
+        MetaMask === "True" &&
         <Button
         link='/products'
         buttonStyle='btn--primary'

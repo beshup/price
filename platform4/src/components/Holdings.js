@@ -16,10 +16,13 @@ class Cards extends Component {
         };
     }
 
+
     async loadBlockchainData() {
+        const ABI = [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"bytes32","name":"id","type":"bytes32"}],"name":"ChainlinkCancelled","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"bytes32","name":"id","type":"bytes32"}],"name":"ChainlinkFulfilled","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"bytes32","name":"id","type":"bytes32"}],"name":"ChainlinkRequested","type":"event"},{"inputs":[],"name":"buyPrice","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"buyTokens","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"endAuction","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"endSeason","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"entityToPublicShareAmount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"bytes32","name":"reqID","type":"bytes32"},{"internalType":"uint256","name":"payout","type":"uint256"}],"name":"fulfill","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"getPlayerBalance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"getShareOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"entityId","type":"uint256"}],"name":"get_top_shareholder","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"request_uri","type":"string"}],"name":"giveDividendPerPlayer","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"name":"jobIdMapping","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"lastDividendWithdrawn","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"numEntities","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"request_uri","type":"string"}],"name":"requestDividendWorthyEntities","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"retrieveNFT","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"startSeason","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"token","outputs":[{"internalType":"contract LTokens","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"entityId","type":"uint256"},{"internalType":"uint256","name":"value","type":"uint256"}],"name":"transfer_from_backdoor","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"weekPeriod","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"weekTrigger","outputs":[],"stateMutability":"nonpayable","type":"function"}];
         window.web3 = new Web3(window.ethereum);
+        window.ethereum.enable();
         // grab the default account address
-        var deployerContract = new window.web3.eth.Contract([], window.web3.eth.defaultAccount, {});
+        var deployerContract = new window.web3.eth.Contract(ABI, "0x762ecabeE51016dd27cf6f52AB170b139d40A168", {});
 
         const userAddress = window.ethereum.selectedAddress
         const accounts = await window.web3.eth.getAccounts()
@@ -27,7 +30,10 @@ class Cards extends Component {
         
         let sharesHeld = []
         for (var i=0; i<20; i++) {
-            sharesHeld.push(deployerContract.methods.getPlayerBalance(i))
+            console.log(i);
+            console.log(await deployerContract.methods.token().call());
+            console.log(await deployerContract.methods.getPlayerBalance(i).call({from:userAddress}));
+            sharesHeld.push(await deployerContract.methods.getPlayerBalance(i).call({from:userAddress}))
         }
 
         fetch("http://hax.hacker.af:5000/grip_league_all_types")
@@ -37,6 +43,7 @@ class Cards extends Component {
                 let tempItems = []
                 sharesHeld.forEach((playerShares, index) => {
                     if (playerShares > 0) {
+                        console.log(tempItems);
                         tempItems.push({"player_data": result[index], "amount": playerShares})
                     }
                 })
@@ -83,13 +90,6 @@ class Cards extends Component {
     }
 
     render() {
-        return (
-            <div>
-              <p>Check out the the console....</p>
-              <p>Your account: {this.state.account}</p>
-            </div>
-          );
-        /*
         const { error, isLoaded, items } = this.state;
         if (error) {
             return <div>Error: {error.message}</div>;
@@ -100,13 +100,13 @@ class Cards extends Component {
             let arr = items.map((player) => {
                 return (
                     <PlayerAsset
-                        src={player.image}
-                        name={player.name}
-                        team={player.team}
-                        position={player.position}
+                        src={player.player_data.image}
+                        name={player.player_data.name}
+                        team={player.player_data.team}
+                        position={player.player_data.position}
                         label='All-Star'
                         path='/services'
-                        sharesOwned='10'
+                        sharesOwned={player.amount}
                     />
                 );
             }); 
@@ -123,7 +123,6 @@ class Cards extends Component {
                 </div>
             );
         }
-        */
     }
 }
 

@@ -8,6 +8,7 @@ import Products from './components/pages/Products';
 import SignUp from './components/pages/SignUp';
 import Transactions from './components/pages/Transactions';
 import Donation from './components/pages/DonationPage';
+import InitialCards from './components/pages/BuyIn';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path='/sign-up' component={SignUp} />
           <Route path='/transactions' component={Transactions} />
           <Route path='/donate' component={Donation} />
+          <Route path='/buyin' component={InitialCards} />
         </Switch>
       </Router>
     </>

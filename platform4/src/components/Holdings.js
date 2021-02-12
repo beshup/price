@@ -1,18 +1,63 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './Cards.css';
 import CardItem from './CardItem';
 import PlayerAsset from './AssetCardItem';
+import Web3 from 'web3'
 
-class Cards extends React.Component {
+class Cards extends Component {
     constructor(props) {
         super(props);
         this.state = {
           error: null,
           isLoaded: false,
-          items: []
+          items: [],
+          account: 'nyeaheh',
+          deployerContract: null
         };
     }
 
+    async loadBlockchainData() {
+        window.web3 = new Web3(window.ethereum);
+        // grab the default account address
+        var deployerContract = new window.web3.eth.Contract([], window.web3.eth.defaultAccount, {});
+
+        const userAddress = window.ethereum.selectedAddress
+        const accounts = await window.web3.eth.getAccounts()
+        this.setState({account: accounts[0]})
+        
+        let sharesHeld = []
+        for (var i=0; i<20; i++) {
+            sharesHeld.push(deployerContract.methods.getPlayerBalance(i))
+        }
+
+        fetch("http://hax.hacker.af:5000/grip_league_all_types")
+          .then(res => res.json())
+          .then(
+            (result) => {
+                let tempItems = []
+                sharesHeld.forEach((playerShares, index) => {
+                    if (playerShares > 0) {
+                        tempItems.push({"player_data": result[index], "amount": playerShares})
+                    }
+                })
+                this.setState({
+                    items: tempItems
+                })
+            },
+            (error) => {
+              this.setState({
+                isLoaded: true,
+                error
+              });
+            }
+        )
+    }
+
+    componentDidMount() {
+        this.loadBlockchainData()
+    }
+    
+/*
     componentDidMount() {
         fetch("http://hax.hacker.af:5000/grip_league")
           .then(res => res.json())
@@ -34,7 +79,7 @@ class Cards extends React.Component {
             }
           )
       }
-
+*/
     createPlayerCards() {
         let ret = '';
         fetch('http://hax.hacker.af:5000/grip_league')
@@ -60,6 +105,13 @@ class Cards extends React.Component {
     }
 
     render() {
+        return (
+            <div>
+              <p>Check out the the console....</p>
+              <p>Your account: {this.state.account}</p>
+            </div>
+          );
+        /*
         const { error, isLoaded, items } = this.state;
         if (error) {
             return <div>Error: {error.message}</div>;
@@ -93,6 +145,7 @@ class Cards extends React.Component {
                 </div>
             );
         }
+        */
     }
 }
 

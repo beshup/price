@@ -39,8 +39,8 @@ class Cards extends React.Component {
     render() {
         const { error, isLoaded, items } = this.state;
         const numShares = 5;
-        const sharePrice = 6;
-        const totalCost = numShares*sharePrice+(items.average/1000);
+        const sharePrice = 0.0006;
+        const totalCost = (numShares*sharePrice+(items.average/1000)).toFixed(3);
         if (error) {
             return <div>Error: {error.message}</div>;
         } else if (!isLoaded) {
@@ -66,11 +66,11 @@ class Cards extends React.Component {
                         />
                     </ul>
                     <div className="confirm-container">
-                        <h1>Confirm ETH Address</h1>
+                        <h2><center>Confirm ETH Address: </center></h2>
                         <center><h3>{localStorage.getItem('userETHAddress') || ''}</h3></center>
                         <br></br>
-                        <center><h3>Price Summary</h3></center>
-                        <h4>{numShares.toString() + ' Shares * $' + sharePrice.toString() + '/share + Est. Gas: ' + items.average + ' gwei = ' + totalCost.toString() + ' ETH'}</h4>
+                        <center><h2>Price Summary: </h2></center>
+                        <h4>{numShares.toString() + ' Shares x ' + sharePrice.toString() + ' ETH/share + Est. Gas: ' + items.average + ' gwei = ' + totalCost.toString() + ' ETH'}</h4>
                         <br></br>
                         <center><button className ="purchase-confirmation">Confirm</button></center>
                     </div>

@@ -34,6 +34,7 @@ class Footer extends React.Component {
               />
               <Button link='/services' buttonStyle='btn--outline'>Subscribe</Button>
             </form>
+            {this.state.password==='admin' && <button>Admin -- Start Season</button>}
             {this.state.password==='admin' && <button>Admin -- End Week</button>}
             {this.state.password==='admin' && <button>Admin -- End Season</button>}
           </div>

@@ -35,7 +35,11 @@ class Cards extends React.Component {
                 });
             }
             )
-        }
+    }
+
+    transfer() {
+        
+    }
 
     render() {
         const { error, isLoaded, items } = this.state;

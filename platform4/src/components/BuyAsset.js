@@ -11,8 +11,34 @@ class Cards extends React.Component {
         this.state = {
             error: null,
             isLoaded: false,
-            items: []
+            items: [],
+            buy: false,
+            sell: false,
+            quantity: 0,
         };
+        this.setQuantity = this.setQuantity.bind(this);
+        this.setBuy = this.setBuy.bind(this);
+        this.setSell = this.setSell.bind(this);
+    }
+
+    setBuy() {
+        this.setState({
+            buy: true,
+            sell: false
+        })
+    }
+
+    setSell() {
+        this.setState({
+            buy: false,
+            set: true
+        })
+    }
+
+    setQuantity(n) {
+        this.setState({
+            quantity: n
+        })
     }
 
     componentDidMount() {
@@ -41,7 +67,8 @@ class Cards extends React.Component {
         const { error, isLoaded, items } = this.state;
         const numShares = 5;
         const sharePrice = 0.0006;
-        const totalCost = (numShares*sharePrice+(items.average/1000)).toFixed(3);
+        const price = parseFloat(localStorage.getItem('playerPurchasePrice').slice(0,-4)).toFixed(2);
+        const totalCost = (this.state.quantity*price+(items.average*0.000000001*21000)).toFixed(4);
         if (error) {
             return <div>Error: {error.message}</div>;
         } else if (!isLoaded) {
@@ -57,6 +84,9 @@ class Cards extends React.Component {
                     <div className='cards__wrapper'>
                     <ul className='cards__items'>
                         <PurchaseCardItem
+                        buyAssert={this.setBuy}
+                        sellAssert={this.setSell}
+                        setQuantity={this.setQuantity}
                         src={localStorage.getItem('playerPurchaseImg') || ''}
                         name={localStorage.getItem('playerPurchaseName') || ''}
                         team={localStorage.getItem('playerPurchaseTeam') || ''}
@@ -66,15 +96,15 @@ class Cards extends React.Component {
                         price={localStorage.getItem('playerPurchasePrice') || ''}
                         />
                     </ul>
+                    </div>
                     <div className="confirm-container">
                         <h2><center>Confirm ETH Address: </center></h2>
-                        <center><h3>{localStorage.getItem('userETHAddress') || ''}</h3></center>
+                        <center><h3>{window.ethereum.selectedAddress}</h3></center>
                         <br></br>
                         <center><h2>Price Summary: </h2></center>
-                        <h4>{numShares.toString() + ' Shares x ' + sharePrice.toString() + ' ETH/share + Est. Gas: ' + items.average + ' gwei = ' + totalCost.toString() + ' ETH'}</h4>
+                        <h4>{this.state.quantity.toString() + ' Shares x ' + localStorage.getItem('playerPurchasePrice') + '/share + Est. Gas: ' + items.average + ' * 21000 gwei = ' + totalCost.toString() + ' ETH'}</h4>
                         <br></br>
                         <center><button className ="purchase-confirmation">Confirm</button></center>
-                    </div>
                     </div>
                 </div>
                 </div>

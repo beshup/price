@@ -2,6 +2,7 @@ import React from 'react';
 import './Cards.css';
 import CardItem from './CardItem';
 import Loading from './Loading';
+import Web3 from 'web3';
 
 class Cards extends React.Component {
 
@@ -19,10 +20,15 @@ class Cards extends React.Component {
         .then(res => res.json())
         .then(
           (result) => {
-            this.setState({
-              isLoaded: true,
-              items: result
-            });
+            for(let i=0; i<result.length; ++i) {
+              window.deployerContract.methods.get_buy_price(result[i].token_id).call().then((price) => {
+                result[i].price=window.web3.utils.fromWei(price);
+                this.setState({
+                  isLoaded: true,
+                  items: result
+                }); 
+              })
+            }
           },
           // Note: it's important to handle errors here
           // instead of a catch() block so that we don't swallow
@@ -35,6 +41,8 @@ class Cards extends React.Component {
           }
         )
     }
+
+
 
 
   render() {
@@ -54,7 +62,8 @@ class Cards extends React.Component {
                       position={player.position}
                       label='All-Star'
                       path='/services'
-                      price={(player.fantasy_score/8).toFixed(2).toString() + ' ETH'}
+                      price={player.price + ' ETH'}
+                      tokenId={player.token_id}
                   />
               );
           }); 

@@ -159,7 +159,7 @@ contract MainManager {
     // function for top shareholder to turn to nft
     function retrieveNFT(uint256 tokenId) public hasSeasonEnded {
         require(msg.sender == get_top_shareholder(tokenId));
-        token.tranfer(get_top_shareholder(tokenId), 1, tokenId);
+        token.transfer(get_top_shareholder(tokenId), 1, tokenId);
     }
 }
 

@@ -5,41 +5,32 @@ pragma solidity ^0.7.4;
 import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 
 contract LTokens is ERC1155 {
-    mapping (uint => string) public playerIdToName;
     mapping (uint => address) public maxOwners;
 
     constructor() public ERC1155("http://hax.hacker.af:5000/player_sft_metadata/{id}") {
-        playerNameToId[0] = "Nikola Jokic";
-        playerNameToId[1] = "Karl-Anthony Towns";
-        playerNameToId[2] = "Joel Embiid";
-        playerNameToId[3] = "Kawhi Leonard";
-        playerNameToId[4] = "Kevin Durant";
-        playerNameToId[5] = "Stephen Curry";
-        playerNameToId[6] = "C.J. McCollum";
-        playerNameToId[7] = "Damian Lillard";
-        playerNameToId[8] = "Kyrie Irving";
-        playerNameToId[9] = "James Harden";
-        _mint(msg.sender, playerNameToId[0], 69, "");
-        _mint(msg.sender, playerNameToId[1], 69, "");
-        _mint(msg.sender, playerNameToId[2], 69, "");
-        _mint(msg.sender, playerNameToId[3], 69, "");
-        _mint(msg.sender, playerNameToId[4], 69, "");
-        _mint(msg.sender, playerNameToId[5], 69, "");
-        _mint(msg.sender, playerNameToId[6], 69, "");
-        _mint(msg.sender, playerNameToId[7], 69, "");
-        _mint(msg.sender, playerNameToId[8], 69, "");
-        _mint(msg.sender, playerNameToId[9], 69, "");
+        // FTs
+        _mint(msg.sender, 0, 69, "");
+        _mint(msg.sender, 1, 69, "");
+        _mint(msg.sender, 2, 69, "");
+        _mint(msg.sender, 3, 69, "");
+        _mint(msg.sender, 4, 69, "");
+        _mint(msg.sender, 5, 69, "");
+        _mint(msg.sender, 6, 69, "");
+        _mint(msg.sender, 7, 69, "");
+        _mint(msg.sender, 8, 69, "");
+        _mint(msg.sender, 9, 69, "");
 
-        _mint(msg.sender, playerNameToId[0], 1, "");
-        _mint(msg.sender, playerNameToId[1], 1, "");
-        _mint(msg.sender, playerNameToId[2], 1, "");
-        _mint(msg.sender, playerNameToId[3], 1, "");
-        _mint(msg.sender, playerNameToId[4], 1, "");
-        _mint(msg.sender, playerNameToId[5], 1, "");
-        _mint(msg.sender, playerNameToId[6], 1, "");
-        _mint(msg.sender, playerNameToId[7], 1, "");
-        _mint(msg.sender, playerNameToId[8], 1, "");
-        _mint(msg.sender, playerNameToId[9], 1, "");
+        // NFTs
+        _mint(msg.sender, 10, 1, "");
+        _mint(msg.sender, 11, 1, "");
+        _mint(msg.sender, 12, 1, "");
+        _mint(msg.sender, 13, 1, "");
+        _mint(msg.sender, 14, 1, "");
+        _mint(msg.sender, 15, 1, "");
+        _mint(msg.sender, 16, 1, "");
+        _mint(msg.sender, 17, 1, "");
+        _mint(msg.sender, 18, 1, "");
+        _mint(msg.sender, 19, 1, "");
  
     }
 

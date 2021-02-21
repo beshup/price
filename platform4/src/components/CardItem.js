@@ -32,10 +32,13 @@ function CardItem(props) {
             {props.r2 && <h5 className='cards__item__pos'>{props.r2}</h5>}
             {props.r3 &&  <h5 className='cards__item__pos'>{props.r3}</h5>}
           </div>
-          <div className="cards_item_buy-sell">
+          {props.btn2Title && <div className="cards_item_buy-sell">
             <Button buttonStyle='MrktButton--buy' onClick={props.action1Handler}>{props.btn1Title}</Button>
             <Button buttonStyle='MrktButton--sell' onClick={props.action2Handler}>{props.btn2Title}</Button>
-          </div>
+          </div>}
+          {props.mainBtnText && <div className="cards_item_buy-sell">
+            <button className="card_item_main_button" onClick={props.mainBtnHandler}>{props.mainBtnText}</button>
+          </div>}
         </Link>}
       </li>
     </>

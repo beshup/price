@@ -53,7 +53,7 @@ class InitialCards extends React.Component {
                       team={player.team}
                       position={player.position}
                       label='All-Star'
-                      path='/services'
+                      path='/marketplace'
                       price={0.1}
                       tokenId={player.token_id}
                   />

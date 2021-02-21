@@ -112,7 +112,7 @@ class Cards extends React.Component {
                         team={localStorage.getItem('playerPurchaseTeam') || ''}
                         position={localStorage.getItem('playerPurchasePos') || ''}
                         label={localStorage.getItem('playerPurchaseLabel') || ''}
-                        path='/services'
+                        path='/marketplace'
                         price={localStorage.getItem('playerPurchasePrice') || ''}
                         />
                     </ul>

@@ -84,7 +84,7 @@ class Cards extends Component {
                     team="Los Angeles Lakers"
                     position="SF"
                     label='All-Star'
-                    path='/services'
+                    path='/marketplace'
                     sharesOwned='10'
                 />
             );
@@ -107,7 +107,7 @@ class Cards extends Component {
                         team={player.player_data.team}
                         position={player.player_data.position}
                         label='All-Star'
-                        path='/services'
+                        path='/marketplace'
                         sharesOwned={player.amount}
                         deployerContract={this.state.deployerContract}
                         userAddress={this.state.userAddress}

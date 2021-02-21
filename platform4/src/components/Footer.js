@@ -58,7 +58,7 @@ class Footer extends React.Component {
                 type='email'
                 placeholder='Your Email'
               />
-              <Button link='/services' buttonStyle='btn--outline'>Subscribe</Button>
+              <Button link='/marketplace' buttonStyle='btn--outline'>Subscribe</Button>
             </form>
             {this.state.password==='admin' && <button onClick={this.startSeason}>Admin -- Start Season</button>}
             {this.state.password==='admin' && <button onClick={this.endWeek}>Admin -- End Week</button>}

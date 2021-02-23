@@ -55,7 +55,7 @@ class Donate extends React.Component {
                       team={player.team}
                       position={player.position}
                       label='All-Star'
-                      path='/services'
+                      path='/marketplace'
                       price={(player.fantasy_score/8).toFixed(2).toString() + ' ETH'}
                   />
               );

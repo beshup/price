@@ -3,7 +3,7 @@ import Navbar from './components/Navbar';
 import './App.css';
 import Home from './components/pages/Home';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Services from './components/pages/Services';
+import Marketplace from './components/pages/Marketplace';
 import Products from './components/pages/Products';
 import SignUp from './components/pages/SignUp';
 import Transactions from './components/pages/Transactions';
@@ -17,7 +17,7 @@ function App() {
   window.web3 = new Web3(window.ethereum);
   window.ethereum.enable();
   // grab the default account address
-  window.deployerContract = new window.web3.eth.Contract(ABI, "0x02f9A57dDFE1BED790C78298165c5cDdcc24ee58", {});
+  window.deployerContract = new window.web3.eth.Contract(ABI, "0xCe715FBcD7719B2e94AE842a6BD8e737A6255f07", {});
 
   window.deployerContract.methods.token().call().then(x => {
     window.tokenContract = new window.web3.eth.Contract(ABI2, x, {});
@@ -29,7 +29,7 @@ function App() {
         <Navbar />
         <Switch>
           <Route path='/' exact component={Home} />
-          <Route path='/services' component={Services} />
+          <Route path='/marketplace' component={Marketplace} />
           <Route path='/products' component={Products} />
           <Route path='/sign-up' component={SignUp} />
           <Route path='/transactions' component={Transactions} />

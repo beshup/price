@@ -15,18 +15,10 @@ function CardItem(props) {
     localStorage.setItem('playerTokenId', props.tokenId);
   }
 
-  function buyHandler() {
-
-  }
-
-  function sellHandler() {
-
-  }
-
   return (
     <>
       <li className='cards__item'>
-        <Link className='cards__item__link' to={props.path}>
+        {props.path && <Link className='cards__item__link' to={props.path}>
           <figure className='cards__item__pic-wrap' data-category={props.label}>
             <img
               className='cards__item__img'
@@ -35,16 +27,19 @@ function CardItem(props) {
             />
           </figure>
           <div className='cards__item__info'>
-            <h5 className='cards__item__name'>{props.name}</h5>
-            <h5 className='cards__item__pos'>Team: {props.team}</h5>
-            <h5 className='cards__item__pos'>Position: {props.position}</h5>
-            <h5 className='cards__item__pos'>Market Price: {props.price}</h5>
+            <h5 className='cards__item__name'>{props.title}</h5>
+            {props.r1 && <h5 className='cards__item__pos'>{props.r1}</h5>}
+            {props.r2 && <h5 className='cards__item__pos'>{props.r2}</h5>}
+            {props.r3 &&  <h5 className='cards__item__pos'>{props.r3}</h5>}
           </div>
-          <div className="cards_item_buy-sell">
-            <Button buttonStyle='MrktButton--buy' onClick={passTransactionData}>Buy</Button>
-            <Button buttonStyle='MrktButton--sell' onClick={passTransactionData}>Sell</Button>
-          </div>
-        </Link>
+          {props.btn2Title && <div className="cards_item_buy-sell">
+            <Button buttonStyle='MrktButton--buy' onClick={props.action1Handler}>{props.btn1Title}</Button>
+            <Button buttonStyle='MrktButton--sell' onClick={props.action2Handler}>{props.btn2Title}</Button>
+          </div>}
+          {props.mainBtnText && <div className="cards_item_buy-sell">
+            <button className="card_item_main_button" onClick={props.mainBtnHandler}>{props.mainBtnText}</button>
+          </div>}
+        </Link>}
       </li>
     </>
   );

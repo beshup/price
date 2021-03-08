@@ -47,7 +47,7 @@ class Footer extends React.Component {
       <div className='footer-container'>
         <section className='footer-subscription'>
           <p className='footer-subscription-heading'>
-            Get Updates From OurName!
+            Get Updates From Pr!ce
           </p>
           <div className='input-areas'>
             <form>

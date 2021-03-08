@@ -48,6 +48,15 @@
     flex-direction: row;
 }
 
+.card_item_main_button {
+    background-color: black;
+    padding: 12px 32px;
+    margin-bottom: 5px;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
 .cards__item {
     display: flex;
     flex: 1;

@@ -1,48 +1,58 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from './MrktButton';
+import { Line } from 'react-chartjs-2';
 import './CardItem.css';
 
-function CardItem(props) {
-
-  function passTransactionData() {
-    localStorage.setItem('playerPurchaseName', props.name);
-    localStorage.setItem('playerPurchaseTeam', props.team);
-    localStorage.setItem('playerPurchasePos', props.position);
-    localStorage.setItem('playerPurchasePrice', props.price);
-    localStorage.setItem('playerPurchaseImg', props.src);
-    localStorage.setItem('playerPurchaseLabel', props.label);
-    localStorage.setItem('playerTokenId', props.tokenId);
+class CardItem extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+        error: null,
+        isLoaded: false,
+        items: [],
+        buy: false,
+        sell: false,
+        quantity: 0,
+    };
   }
 
-  return (
-    <>
-      <li className='cards__item'>
-        {props.path && <Link className='cards__item__link' to={props.path}>
-          <figure className='cards__item__pic-wrap' data-category={props.label}>
-            <img
-              className='cards__item__img'
-              alt='Travel Image'
-              src={props.src}
-            />
-          </figure>
-          <div className='cards__item__info'>
-            <h5 className='cards__item__name'>{props.title}</h5>
-            {props.r1 && <h5 className='cards__item__pos'>{props.r1}</h5>}
-            {props.r2 && <h5 className='cards__item__pos'>{props.r2}</h5>}
-            {props.r3 &&  <h5 className='cards__item__pos'>{props.r3}</h5>}
-          </div>
-          {props.btn2Title && <div className="cards_item_buy-sell">
-            <Button buttonStyle='MrktButton--buy' onClick={props.action1Handler}>{props.btn1Title}</Button>
-            <Button buttonStyle='MrktButton--sell' onClick={props.action2Handler}>{props.btn2Title}</Button>
-          </div>}
-          {props.mainBtnText && <div className="cards_item_buy-sell">
-            <button className="card_item_main_button" onClick={props.mainBtnHandler}>{props.mainBtnText}</button>
-          </div>}
-        </Link>}
-      </li>
-    </>
-  );
+  render() {
+    return (
+      <>
+        <li className='cards__item'>
+          {this.props.path && <Link className='cards__item__link' to={this.props.path}>
+            <figure className='cards__item__pic-wrap' data-category={this.props.label}>
+              <img
+                className='cards__item__img'
+                alt='Travel Image'
+                src={this.props.src}
+              />
+            </figure>
+            <div className='cards__item__info'>
+              <h5 className='cards__item__name'>{this.props.title}</h5>
+              {this.props.r1 && <h5 className='cards__item__pos'>{this.props.r1}</h5>}
+              {this.props.r2 && <h5 className='cards__item__pos'>{this.props.r2}</h5>}
+              {this.props.r3 &&  <h5 className='cards__item__pos'>{this.props.r3}</h5>}
+              {this.props.graphEnabled && <Line
+                data={this.props.graphData}
+                width={100}
+                height={70}
+                options={this.props.graphOptions}
+              />}
+            </div>
+            {this.props.btn2Title && <div className="cards_item_buy-sell">
+              <Button buttonStyle='MrktButton--buy' onClick={this.props.action1Handler}>{this.props.btn1Title}</Button>
+              <Button buttonStyle='MrktButton--sell' onClick={this.props.action2Handler}>{this.props.btn2Title}</Button>
+            </div>}
+            {this.props.mainBtnText && <div className="cards_item_buy-sell">
+              <button className="card_item_main_button" onClick={this.props.mainBtnHandler}>{this.props.mainBtnText}</button>
+            </div>}
+          </Link>}
+        </li>
+      </>
+    );
+  }
 }
 
 export default CardItem;

@@ -3,6 +3,7 @@ import './Cards.css';
 import CardItem from './CardItem';
 import Loading from './Loading';
 import Web3 from 'web3';
+import { Line } from 'react-chartjs-2';
 
 class Cards extends React.Component {
 
@@ -51,18 +52,40 @@ class Cards extends React.Component {
           return <Loading></Loading>;
       } else {
           console.log(items);
+          const data = {
+            labels: ['1', '2', '3', '4', '5', '6'],
+            datasets: [
+              {
+                label: 'Share Price (ETH)',
+                data: [12, 19, 3, 5, 2, 3],
+                fill: false,
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgba(255, 99, 132, 0.2)',
+              },
+            ],
+          };
+          const options = {
+            scales: {
+              yAxes: [
+                {
+                  ticks: {
+                    beginAtZero: true,
+                  },
+                },
+              ],
+            },
+          };
           let arr = items.map((player) => {
               return (
                   <CardItem
                       src={player.image}
                       title={player.name}
-                      r1={'Team: ' + player.team}
-                      r2={'Position: ' + player.position}
+                      graphEnabled={true}
+                      graphData={data}
+                      graphOptions={options}
                       label='All-Star'
                       path='/marketplace'
-                      r3={player.price + ' ETH'}
-                      btn1Title={'Buy'}
-                      btn2Title={'Sell'}
+                      mainBtnText='More'
                       tokenId={player.token_id}
                   />
               );

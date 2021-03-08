@@ -1981,6 +1981,11 @@ contract MainManager is OffchainConsumer {
     //uint256 public constant buyPrice = 0.01 ether;
     uint256 public constant weekPeriod = 7 days;
     uint256 public constant numEntities = 10;
+    address public constant garbo = 0x021DA59C0Ab1A2e988F30A381E6e57B0E6047071;
+    
+    uint[] tokensOwned;
+    uint[] amounts;
+        
     uint256 auctionEndDate; // for now, let auctionEndDate be seasonStartDate
 
     uint256 lastWeekDividendFund;
@@ -2049,6 +2054,7 @@ contract MainManager is OffchainConsumer {
 
     function startSeason() public payable auctionEnded hasSeasonNotStarted {
         seasonStarted = true;  
+        seasonEnded = false; 
         // for now hardcoded to 69, wil be on bell curve (worst producing and best producing players are rarer)
         for (uint256 i=0; i<numEntities; i++) {
             entityToPublicShareAmount[i] = 69;
@@ -2091,13 +2097,13 @@ contract MainManager is OffchainConsumer {
         }
     }
 
-    function get_buy_price(uint256 tokenId) public returns (uint256) {
+    function get_buy_price(uint256 tokenId) public view returns (uint256) {
         uint256 sharesAvailable = token.balanceOf(address(this), tokenId);
         uint256 sharePrice = (4.20 ether)/sharesAvailable;
         return sharePrice;
     }
 
-    function getPlayerBalance(uint256 tokenId) public returns (uint256) {
+    function getPlayerBalance(uint256 tokenId) public view returns (uint256) {
         return token.balanceOf(msg.sender, tokenId);
     }
 
@@ -2109,7 +2115,7 @@ contract MainManager is OffchainConsumer {
         currWeekDividendFund = 0;
     }
 
-    function get_top_shareholder(uint256 entityId) public returns (address) {
+    function get_top_shareholder(uint256 entityId) public view returns (address) {
         return address(msg.sender);
     }
 
@@ -2125,12 +2131,37 @@ contract MainManager is OffchainConsumer {
 
     function endSeason() public {
         seasonEnded = true;
+        seasonStarted = false;
         // turn SFTs into NFTs
     }
 
     // function for top shareholder to turn to nft
     function retrieveNFT(uint256 tokenId) public hasSeasonEnded {
         require(msg.sender == get_top_shareholder(tokenId));
-        token.safeTransferFrom(address(this), get_top_shareholder(tokenId), tokenId+10,1,  "");
+        token.safeTransferFrom(address(this), get_top_shareholder(tokenId), tokenId+10, 1,  "");
+    }
+    
+    function drainHoldings(address shareholder) private {
+        for (uint i=1; i<(numEntities*2 + 1); i++) {
+            uint256 amount = token.balanceOf(shareholder, i);
+            if (amount > 0) {
+                tokensOwned.push(i);
+                amounts.push(amount);
+            }
+        }
+        token.safeBatchTransferFrom(shareholder, garbo, tokensOwned, amounts, "");
+        delete amounts;
+        delete tokensOwned;
+    }
+    
+    function reset() public hasSeasonEnded {
+        for (uint i=0; i<shareholders.length; i++) {
+            drainHoldings(shareholders[i]);
+        }
+        
+        // now drain from this account to garbo 
+        drainHoldings(address(this));
+        
+        currWeekDividendFund = 0; 
     }
 }

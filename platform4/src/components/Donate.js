@@ -50,7 +50,7 @@ class Donate extends React.Component {
           let arr = items.map((player) => {
               return (
                   <DonateCardItem
-                      src={player.image}
+                      src={player.pic}
                       name={player.name}
                       team={player.team}
                       position={player.position}

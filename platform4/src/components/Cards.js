@@ -32,7 +32,7 @@ class Cards extends React.Component {
   }
 
   componentDidMount() {
-      fetch(process.env.REACT_APP_NBA_API)
+      fetch(process.env.REACT_APP_NBA_API + 'grip_league')
         .then(res => res.json())
         .then(
           (result) => {
@@ -93,7 +93,7 @@ class Cards extends React.Component {
           let arr = items.map((player) => {
               return (
                   <CardItem
-                      src={player.image}
+                      src={player.pic}
                       title={player.name}
                       graphEnabled={true}
                       graphData={this.generateData()}
@@ -115,6 +115,30 @@ class Cards extends React.Component {
                   </ul>
                   <ul className='cards__items'>
                       {arr.slice(5,10)}
+                  </ul>
+                  <ul className='cards__items'>
+                      {arr.slice(10,15)}
+                  </ul>
+                  <ul className='cards__items'>
+                      {arr.slice(15,20)}
+                  </ul>
+                  <ul className='cards__items'>
+                      {arr.slice(20,25)}
+                  </ul>
+                  <ul className='cards__items'>
+                      {arr.slice(25,30)}
+                  </ul>
+                  <ul className='cards__items'>
+                      {arr.slice(30,35)}
+                  </ul>
+                  <ul className='cards__items'>
+                      {arr.slice(35,40)}
+                  </ul>
+                  <ul className='cards__items'>
+                      {arr.slice(40,45)}
+                  </ul>
+                  <ul className='cards__items'>
+                      {arr.slice(45,50)}
                   </ul>
                   </div>
               </div>

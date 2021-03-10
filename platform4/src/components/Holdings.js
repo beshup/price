@@ -102,7 +102,7 @@ class Cards extends Component {
             let arr = items.map((player) => {
                 return (
                     <PlayerAsset
-                        src={player.player_data.image}
+                        src={player.player_data.pic}
                         name={player.player_data.name}
                         team={player.player_data.team}
                         position={player.player_data.position}

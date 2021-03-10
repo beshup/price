@@ -16,7 +16,7 @@ class InitialCards extends React.Component {
   }
 
   componentDidMount() {
-      fetch(process.env.REACT_APP_NBA_API)
+      fetch(process.env.REACT_APP_NBA_API + 'grip_league')
         .then(res => res.json())
         .then(
           (result) => {
@@ -49,7 +49,7 @@ class InitialCards extends React.Component {
           let arr = items.map((player) => {
               return (
                   <CardItem
-                      src={player.image}
+                      src={player.pic}
                       title={player.name}
                       r1={'Team: ' + player.team}
                       r2={'Position: ' + player.position}

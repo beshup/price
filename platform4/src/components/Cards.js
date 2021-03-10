@@ -16,6 +16,21 @@ class Cards extends React.Component {
       };
   }
 
+  generateData() {
+    return {
+      labels: ['O', 'N', 'D', 'J', 'F', 'M'],
+      datasets: [
+        {
+          label: 'Share Price (ETH)',
+          data: [Math.floor(Math.random()*20), Math.floor(Math.random()*20), Math.floor(Math.random()*20), Math.floor(Math.random()*20), Math.floor(Math.random()*20), Math.floor(Math.random()*20)],
+          fill: false,
+          backgroundColor: 'rgb(255, 99, 132)',
+          borderColor: 'rgba(255, 99, 132, 0.2)',
+        },
+      ],
+    };
+  }
+
   componentDidMount() {
       fetch(process.env.REACT_APP_NBA_API)
         .then(res => res.json())
@@ -81,7 +96,7 @@ class Cards extends React.Component {
                       src={player.image}
                       title={player.name}
                       graphEnabled={true}
-                      graphData={data}
+                      graphData={this.generateData()}
                       graphOptions={options}
                       label='All-Star'
                       path='/marketplace'

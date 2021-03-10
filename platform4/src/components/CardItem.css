@@ -1,7 +1,10 @@
 .cards__item__name{
     color: black;
     text-align: center;
-    margin: 5px;
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding-top: 20px;
     border: 1px;
     font-size: 20px;
     font-weight: 900;
@@ -39,19 +42,13 @@
 }
 
 .cards_item_buy-sell {
-    flex-flow: row;
     align-items: center;
-    margin: 0 auto;
-    padding: 0px 0px 0px 0px;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
 }
 
 .card_item_main_button {
     background-color: black;
     padding: 12px 32px;
-    margin-bottom: 5px;
+    margin-bottom: 0px;
     color: white;
     border: none;
     cursor: pointer;
